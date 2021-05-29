@@ -1,0 +1,52 @@
+.kpop-stand {
+  margin-top: 50px;
+  color: #878c92;
+}
+
+.kpop-stand .container {
+  background: #141e2a;
+  max-width: 1000px !important;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.kpop-stand-text {
+  font-weight: 300;
+}
+
+.kpop-stand hr {
+  margin-bottom: 50px;
+}
+
+.deposited {
+  margin-top: 70px;
+}
+
+.accordion-button {
+  font-size: 1.8rem !important;
+  background-color: #131e2a !important;
+  color: #878c92 !important;
+}
+
+.accordion-item {
+  border: unset !important;
+  background: unset !important;
+}
+
+.accordion-button::after {
+  content: "\f078" !important;
+  background-image: unset !important;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-style: normal;
+}
+
+.accordion-collapse {
+  background-color: #131e2a !important;
+}
+
+.accordion-button:focus {
+  border-color: unset !important;
+
+  box-shadow: unset !important;
+}

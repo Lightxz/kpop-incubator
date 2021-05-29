@@ -1,0 +1,37 @@
+.card-item {
+  border: 1px solid #878c92;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 20px 30px;
+}
+
+.fw-200 p,
+.fw-200 small {
+  font-weight: 200;
+}
+
+.deposited-btn {
+  border: 1px solid #878c92 !important;
+  background-color: transparent !important;
+  color: #ff45a0 !important;
+  font-size: 1.6rem !important;
+  border-radius: 5px !important;
+  width: 100%;
+  max-width: 150px;
+  padding: 5px 0 !important;
+}
+
+.deposited-btn:last-child {
+  margin-top: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+  .card-item {
+    padding: 20px;
+  }
+
+  .fw-200 p,
+  .fw-200 small {
+    font-size: 1.6rem;
+  }
+}

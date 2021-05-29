@@ -1,0 +1,38 @@
+.kpop-earned-bal {
+  color: #fff !important;
+}
+
+.kpop-earned-bal p {
+  font-weight: 500;
+}
+
+.kpop-earned-bal small {
+  font-weight: 100;
+}
+
+.claim-btn {
+  border: 1px solid #878c92 !important;
+  background-color: transparent !important;
+  color: #ff45a0 !important;
+  font-size: 1.6rem !important;
+  padding: 5px 50px !important;
+  border-radius: 5px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .claim-btn {
+    padding: 5px 20px !important;
+  }
+
+  .kpop-earned-bal p {
+    font-size: 2rem;
+  }
+
+  .kpop-earned-bal small {
+    font-size: 1.8rem;
+  }
+
+  .kpop-earned-label {
+    font-size: 1.8rem;
+  }
+}
