@@ -9,3 +9,50 @@
   padding: 20px;
   border-radius: 8px;
 }
+
+.header-text {
+  font-weight: 300;
+}
+
+.incubator-btn {
+  border: none !important;
+  background-color: #878c9273 !important;
+  color: #ff45a0 !important;
+  font-weight: 600;
+  font-size: 1.6rem !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 5px !important;
+}
+
+.pool-container {
+  padding: 0;
+}
+
+.pool-container .image {
+  width: 5rem;
+  height: 5rem;
+  margin-right: 1rem;
+}
+
+.text-container {
+  flex-direction: column;
+}
+.text-container .header {
+  font-weight: 600;
+  color: white;
+  font-size: 1.75rem;
+}
+.text-container .subheader {
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.roi-text-container {
+  flex-direction: column;
+  font-size: 1.5rem;
+}
+
+.roi-rate {
+  color: white;
+  margin-right: 1rem;
+}
