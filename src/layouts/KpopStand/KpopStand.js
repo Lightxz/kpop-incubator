@@ -9,7 +9,7 @@ function KpopStand(props) {
     <>
       <section className="kpop-stand">
         <Container>
-          <p className="kpop-stand-text">KPOP Stand</p>
+          <p className="kpop-stand-text">KPOP Incubator</p>
           <hr></hr>
           <KpopEarned />
           <div className="deposited">

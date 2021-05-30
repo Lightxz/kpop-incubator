@@ -2,6 +2,7 @@ import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import Landing from "./layouts/Landing/Landing";
 import KpopStand from "./layouts/KpopStand/KpopStand";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Navbar />
       <Landing />
       <KpopStand />
+      <Footer />
     </div>
   );
 }
