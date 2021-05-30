@@ -5,7 +5,7 @@ import "./Footer.css";
 import { Container } from "react-bootstrap";
 
 // Logo
-import KPOPlogo from "../../images/logo.png";
+import KPOPlogo from "../../images/kpop-logo.png";
 
 // Icons
 import { Twitter, Telegram } from "react-bootstrap-icons";

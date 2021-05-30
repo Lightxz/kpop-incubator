@@ -1,0 +1,11 @@
+.active-pools {
+  margin: 2rem;
+  color: #878c92;
+}
+
+.active-pools .container {
+  background: #141e2a;
+  max-width: 1000px !important;
+  padding: 20px;
+  border-radius: 8px;
+}

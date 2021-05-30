@@ -13,11 +13,11 @@ function KpopStand(props) {
           <hr></hr>
           <KpopEarned />
           <div className="deposited">
-            <div class="accordion" id="deposited-accordion">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="item-heading">
+            <div className="accordion" id="deposited-accordion">
+              <div className="accordion-item">
+                <h2 className="accordion-header" id="item-heading">
                   <button
-                    class="accordion-button collapsed"
+                    className="accordion-button collapsed"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseTwo"
@@ -30,11 +30,11 @@ function KpopStand(props) {
                 <hr></hr>
                 <div
                   id="collapseTwo"
-                  class="accordion-collapse collapse"
+                  className="accordion-collapse collapse"
                   aria-labelledby="item-heading"
                   data-bs-parent="#deposited-accordion"
                 >
-                  <div class="accordion-body">
+                  <div className="accordion-body">
                     <Row>
                       <DepositedCard />
                     </Row>
