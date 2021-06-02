@@ -5,6 +5,8 @@ import DepositedCard from "../../components/DepositedCard/DepositedCard";
 import { Container, Row } from "react-bootstrap";
 
 function KpopStand(props) {
+  const { handleOpenModal } = props;
+
   return (
     <>
       <section className="kpop-stand">
@@ -30,13 +32,13 @@ function KpopStand(props) {
                 <hr></hr>
                 <div
                   id="collapseTwo"
-                  className="accordion-collapse collapse"
+                  className="accordion-collapse collapse show"
                   aria-labelledby="item-heading"
                   data-bs-parent="#deposited-accordion"
                 >
-                  <div className="accordion-body">
+                  <div className="accordion-body ">
                     <Row>
-                      <DepositedCard />
+                      <DepositedCard handleOpenModal={handleOpenModal} />
                     </Row>
                   </div>
                 </div>

@@ -4,9 +4,10 @@ import logo from "../../images/kpop-logo.png";
 import { Row, Col, Button } from "react-bootstrap";
 
 function DepositedCard(props) {
+  const { handleOpenModal } = props;
   return (
     <>
-      <Col xs={12} sm={6}>
+      <Col>
         <div className="card-item">
           <p>LP Deposited</p>
           <Row className="d-flex align-items-center">
@@ -20,8 +21,18 @@ function DepositedCard(props) {
               </div>
             </Col>
             <Col xs={6} sm={6} className="text-end">
-              <Button className="deposited-btn">Withdraw</Button>
-              <Button className="deposited-btn">Claim</Button>
+              <Button
+                className="deposited-btn"
+                onClick={() => handleOpenModal("STAKE")}
+              >
+                Stake
+              </Button>
+              <Button
+                className="deposited-btn"
+                onClick={() => handleOpenModal("UNSTAKE")}
+              >
+                Unstake
+              </Button>
             </Col>
           </Row>
         </div>

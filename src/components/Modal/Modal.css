@@ -1,0 +1,89 @@
+body .modalContainer {
+  border-radius: 15px;
+  border-color: transparent;
+  overflow: hidden;
+  color: white;
+  background-color: #131f2a;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 5rem;
+  position: relative;
+}
+
+.modalHeaderText {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.lpStatusContainer {
+  background-color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+}
+
+.lpInputContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.lp-image {
+  height: 5rem;
+  width: 5rem;
+  margin-right: 1rem;
+}
+
+.subText {
+  font-size: 1rem;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+
+.closeIconButton {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 3rem;
+  border-radius: 5rem;
+}
+
+.closeIconButton:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.actionButton {
+  border: none !important;
+  background-color: #ff45a0 !important;
+  color: white !important;
+  font-size: 1.6rem !important;
+  border-radius: 5px !important;
+  width: 100%;
+  max-width: 150px;
+  padding: 5px 0 !important;
+  margin: 1rem;
+}
+
+.button-disabled {
+  opacity: 0.3 !important;
+}
+
+.modalInput {
+  font-size: 1.5rem !important;
+}
