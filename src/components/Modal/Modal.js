@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Modal.css";
+import Web3 from 'web3';
 
 import { Modal, Button, InputGroup, FormControl } from "react-bootstrap";
 
@@ -11,30 +12,53 @@ import logo from "../../images/kpop-logo.png";
 
 function ModalComponent(props) {
   const [amount, setAmount] = useState(0);
-  const [maxAvailable, setMaxAvailable] = useState(1000);
   const { isModalVisible, handleClose, modalType } = props;
+
 
   const handleReset = () => {
     setAmount(0);
-    setMaxAvailable(1000);
   };
 
   const handleCloseModal = () => {
     handleClose();
     handleReset();
   };
+  
+  const handleWithdrawal = async () => {
+    let _web3 = window.w3;
+    let myContract = new _web3.eth.Contract(window.farming_abi, window.farming_address);
+    
+    await myContract.methods.unstake(Web3.utils.toWei(amount.toString())).send({
+        from : window.account
+    });
 
-  const handleWithdrawal = () => {
-    alert("handle withdrawal here");
+    window.location.reload();
+  };
+  
+  const handleDeposit = async () => {
+    let _web3 = window.w3;
+    let myContract = new _web3.eth.Contract(window.farming_abi, window.farming_address);
+    let myToken = new _web3.eth.Contract(window.erc20_abi, "0x83ca76bdc2e454e362826c25b8f4abd0791bb594");
+    
+    let approvedAmount = await myToken.methods.allowance(window.account, window.farming_address).call();
+    approvedAmount = Web3.utils.fromWei(approvedAmount);
+
+    if(approvedAmount<amount){
+        await myToken.methods.approve(window.farming_address, Web3.utils.toWei('1000000000000000000') ).send({
+        from : window.account
+      });
+
+    }
+
+    await myContract.methods.stake(Web3.utils.toWei(amount.toString())).send({
+        from : window.account
+    });
+
     handleCloseModal();
+    window.location.reload();
   };
 
-  const handleDeposit = () => {
-    alert("handle deposit here");
-    handleCloseModal();
-  };
-
-  const isButtonDisabled = amount > maxAvailable;
+  const isButtonDisabled = amount > (modalType === "STAKE" ? window.lpBalance : window.depositedLp );
 
   const modalActionButton =
     modalType === "STAKE" ? (
@@ -89,7 +113,7 @@ function ModalComponent(props) {
         <div className="d-flex align-items-center">
           <img src={logo} alt="KPOP" className="lp-image" />
           <p className="flex1 m-0">BNB/KPOP LP</p>
-          <p className="m-0">{`${maxAvailable} LP`}</p>
+          <p className="m-0">{`${(modalType === "STAKE" ? window.lpBalance : window.depositedLp )} LP`}</p>
         </div>
       </div>
 
@@ -105,12 +129,12 @@ function ModalComponent(props) {
           <Button
             variant="outline-secondary"
             id="button-addon2"
-            onClick={() => setAmount(maxAvailable)}
+            onClick={() => setAmount((modalType === "STAKE" ? window.lpBalance : window.depositedLp ))}
           >
             max
           </Button>
         </InputGroup>
-        <p className="m-0 subText">{`Available max ${maxAvailable}`}</p>
+        <p className="m-0 subText">{`Available max ${(modalType === "STAKE" ? window.lpBalance : window.depositedLp )}`}</p>
       </div>
       {modalActionButton}
     </Modal>

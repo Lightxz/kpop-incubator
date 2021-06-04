@@ -21,7 +21,7 @@ function Navbar(props) {
 
           <Nav.Item>
             <Nav.Link onClick={handleConnect}>
-              <span>Connect</span>
+              <span id="connectButton" >Connect</span>
             </Nav.Link>
           </Nav.Item>
         </Container>
