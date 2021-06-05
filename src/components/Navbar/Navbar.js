@@ -21,7 +21,7 @@ function Navbar(props) {
 
           <Nav.Item>
             <Nav.Link onClick={handleConnect}>
-              <span id="connectButton" >Connect</span>
+              <span id="connectButton">Start Incubator</span>
             </Nav.Link>
           </Nav.Item>
         </Container>
