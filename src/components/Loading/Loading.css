@@ -1,0 +1,26 @@
+.loadingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  height: 100vh;
+}
+
+body .spinner-border {
+  width: 8rem;
+  height: 8rem;
+  color: #ff46a0;
+  display: inline-block;
+  vertical-align: -0.125em;
+  border: 0.55em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: 0.75s linear infinite spinner-border;
+}

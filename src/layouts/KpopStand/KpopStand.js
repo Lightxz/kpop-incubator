@@ -2,6 +2,7 @@ import React from "react";
 import "./KpopStand.css";
 import KpopEarned from "../../components/KpopEarned/KpopEarned";
 import DepositedCard from "../../components/DepositedCard/DepositedCard";
+import KPOPLogo from "../../images/kpop-logo.png";
 import { Container, Row } from "react-bootstrap";
 
 function KpopStand(props) {
@@ -11,7 +12,16 @@ function KpopStand(props) {
     <>
       <section className="kpop-stand">
         <Container>
-          <p className="kpop-stand-text">KPOP Incubator</p>
+          <div className="kpop-stand-header-container">
+            <p className="kpop-stand-text">KPOP Incubator</p>
+            <div className="price-container">
+              <img src={KPOPLogo} alt="KPOP" className="value-logo" />
+              <p className="m-0">{`$ ${
+                Number(window.kpopUsdPrice)?.toFixed(3) || 0
+              }`}</p>
+            </div>
+          </div>
+
           <hr></hr>
           <KpopEarned />
           <div className="deposited">

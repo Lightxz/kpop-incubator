@@ -118,7 +118,7 @@ class ActivePools extends Component {
                       suffix={"%"}
                     />
                   </strong>
-                  <span className="roi-freq">Annualy</span>
+                  <span className="roi-freq">Annually</span>
                 </p>
               </div>
             </Col>

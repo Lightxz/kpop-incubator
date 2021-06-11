@@ -10,6 +10,13 @@
   border-radius: 8px;
 }
 
+.kpop-stand-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .kpop-stand-text {
   font-weight: 300;
 }
@@ -47,6 +54,18 @@
 
 .accordion-button:focus {
   border-color: unset !important;
-
   box-shadow: unset !important;
+}
+
+.value-logo {
+  height: 3rem;
+  width: 3rem;
+  margin-right: 1rem;
+}
+
+.price-container {
+  display: flex;
+  width: 30rem;
+  justify-content: flex-end;
+  align-items: center;
 }
