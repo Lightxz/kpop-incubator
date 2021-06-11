@@ -491,7 +491,6 @@ class App extends Component {
   }
 
   async handleConnect() {
-    console.log("[web3] getting provider...");
     this.setState({ isLoading: true });
     // Modern Browsers like Chrome and Brave
     if (window.ethereum) {
@@ -501,15 +500,15 @@ class App extends Component {
       } catch (error) {
         // User denied account access...
         alert("You must connect your wallet !");
-        console.error("User denied account access to metamask.");
+        this.setState({ isLoading: false });
         return;
       }
     } else {
       // you cant connect
-      console.error("Unable to connect to metamask");
       alert(
         "You have to use Trustwallet app or install Metamask extension in your browser to use this app, you can install it from :  https://metamask.io/download.html"
       );
+      this.setState({ isLoading: false });
       return;
     }
     let web3 = new Web3(window.ethereum);
@@ -518,6 +517,7 @@ class App extends Component {
     let chainId = await web3.eth.net.getId();
     if (chainId !== 56) {
       alert("Please switch your wallet to BSC");
+      this.setState({ isLoading: false });
       return;
     }
 
@@ -579,7 +579,6 @@ class App extends Component {
     window.depositedLp = deposited;
 
     this.setState({ walletConnected: true, isLoading: false });
-    console.log("web3 got provider!");
   }
 
   handleCloseModal() {
