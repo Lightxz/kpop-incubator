@@ -48,7 +48,7 @@ class ActivePools extends Component {
               <p className="m-0 header-text">Pool</p>
             </Col>
             <Col>
-              <p className="m-0 header-text">Yield per $1000</p>
+              <p className="m-0 header-text">Emission per Day</p>
             </Col>
             <Col>
               <p className="m-0 header-text">ROI</p>

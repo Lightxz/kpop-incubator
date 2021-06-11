@@ -60,7 +60,7 @@ const Footer = () => {
                   <span className="footer-social-icon-medium">M</span>
                 </a>
                 <a
-                  href="https://www.youtube.com/watch?v=vqRcWm_fslY"
+                  href="https://www.youtube.com/channel/UCbAjafnThbqu0bQGSc9m5Sg"
                   rel="noreferrer"
                   target="_blank"
                   className="footer-link"
