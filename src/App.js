@@ -616,7 +616,7 @@ class App extends Component {
         ) : (
           <div>
             <KpopStand handleOpenModal={this.handleOpenModal} />
-            {/* <ActivePools /> */}
+            <ActivePools />
           </div>
         )}
 
