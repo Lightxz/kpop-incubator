@@ -607,18 +607,20 @@ class App extends Component {
     return (
       <div className="App">
         {this.state.isLoading && <Loading />}
+        {/* {false && <Loading />} */}
         <Navbar handleConnect={this.handleConnect} />
         <Landing />
         {!this.state.walletConnected ? (
+          // {false ? (
           <ConnectYourWallet />
         ) : (
           <div>
             <KpopStand handleOpenModal={this.handleOpenModal} />
-            <ActivePools />
+            {/* <ActivePools /> */}
           </div>
         )}
 
-        <Footer />
+        {/* <Footer /> */}
 
         <Modal
           isModalVisible={this.state.isModalVisible}

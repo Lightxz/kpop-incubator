@@ -22,13 +22,59 @@
   margin: 1rem;
 }
 
+.deposited-btn-container {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.deposited-information {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+}
+
+.deposited-text-container {
+  min-width: 20rem;
+  width: 100%;
+  margin: 1rem 2rem;
+  flex-direction: column;
+}
+.deposited-text-container .header {
+  font-weight: 600;
+  font-size: 1.75rem;
+}
+.deposited-text-container .subheader {
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
 @media only screen and (max-width: 600px) {
+  .deposited-text-container {
+    margin: 1rem !important;
+  }
+
   .card-item {
-    padding: 20px;
+    padding: 1rem;
   }
 
   .fw-200 p,
   .fw-200 small {
     font-size: 1.6rem;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .deposited-container {
+    flex-direction: column;
+  }
+  .deposited-btn-container {
+    margin-top: 2rem;
+  }
+
+  .deposited-text-container {
+    margin: 1rem 2rem;
   }
 }

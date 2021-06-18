@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./ActivePools.css";
 import Web3 from "web3";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import logo from "../../images/kpop-logo.png";
+import mainLogo from "../../images/kpop-logo.png";
+import subLogo from "../../images/BNB-logo.png";
 import NumberFormat from "react-number-format";
 
 class ActivePools extends Component {
@@ -63,7 +64,11 @@ class ActivePools extends Component {
           <hr />
           <Row className="d-flex align-items-center py-4">
             <Col className="pool-container d-flex" xs={4}>
-              <img src={logo} alt="KPOP" className="image" />
+              <div className="logo-container">
+                <img src={mainLogo} alt="KPOP" className="mainLogo" />
+                <img src={subLogo} className="subLogo" alt="logo" />
+              </div>
+
               <div className="d-flex text-container">
                 <p className="header m-0">KPOP/BNB</p>
                 <p className="subheader m-0">Pancakeswap V2</p>

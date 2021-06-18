@@ -19,6 +19,7 @@
 
 .kpop-stand-text {
   font-weight: 300;
+  margin: 0;
 }
 
 .kpop-stand hr {
@@ -65,7 +66,11 @@
 
 .price-container {
   display: flex;
-  width: 30rem;
   justify-content: flex-end;
   align-items: center;
+}
+
+.kpop-usd-price {
+  color: #878c92 !important;
+  text-decoration: none;
 }

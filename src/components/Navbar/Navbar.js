@@ -46,7 +46,7 @@ function Navbar(props) {
               rel="noreferrer"
               target="_blank"
             >
-              <img className="logo" src={logo} alt="logo" />
+              <img className="nav-logo" src={logo} alt="logo" />
               <p className="brand-name">
                 <span>KPOP</span> DIGITAL
               </p>

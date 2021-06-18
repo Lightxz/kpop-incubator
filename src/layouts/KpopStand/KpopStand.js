@@ -7,6 +7,9 @@ import { Container, Row } from "react-bootstrap";
 
 function KpopStand(props) {
   const { handleOpenModal } = props;
+  const kpopUsdPrice = window.kpopUsdPrice
+    ? Number(window.kpopUsdPrice)?.toFixed(4)
+    : 0;
 
   return (
     <>
@@ -16,9 +19,12 @@ function KpopStand(props) {
             <p className="kpop-stand-text">KPOP Incubator</p>
             <div className="price-container">
               <img src={KPOPLogo} alt="KPOP" className="value-logo" />
-              <p className="m-0">{`$ ${
-                Number(window.kpopUsdPrice)?.toFixed(3) || 0
-              }`}</p>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.dextools.io/app/pancakeswap/pair-explorer/0x83ca76bdc2e454e362826c25b8f4abd0791bb594"
+                className="kpop-usd-price"
+              >{`$ ${kpopUsdPrice}`}</a>
             </div>
           </div>
 
