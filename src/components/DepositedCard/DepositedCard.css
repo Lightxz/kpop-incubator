@@ -54,6 +54,7 @@
 @media only screen and (max-width: 600px) {
   .deposited-text-container {
     margin: 1rem !important;
+    margin-left: 2rem !important;
   }
 
   .card-item {
