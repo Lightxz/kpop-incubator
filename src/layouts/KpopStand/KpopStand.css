@@ -74,3 +74,8 @@
   color: #878c92 !important;
   text-decoration: none;
 }
+
+.kpop-usd-price:hover {
+  color: #ff45a0 !important;
+  text-decoration: underline;
+}

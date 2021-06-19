@@ -5,6 +5,10 @@ import DepositedCard from "../../components/DepositedCard/DepositedCard";
 import KPOPLogo from "../../images/kpop-logo.png";
 import { Container, Row } from "react-bootstrap";
 
+import mainImage from "../../images/kpop-logo.png";
+import bnbLogo from "../../images/BNB-logo.png";
+import busdLogo from "../../images/busd-logo.png";
+
 function KpopStand(props) {
   const { handleOpenModal } = props;
   const kpopUsdPrice = window.kpopUsdPrice
@@ -54,7 +58,22 @@ function KpopStand(props) {
                 >
                   <div className="accordion-body ">
                     <Row>
-                      <DepositedCard handleOpenModal={handleOpenModal} />
+                      <DepositedCard
+                        title="KPOP/BNB LP"
+                        mainImage={mainImage}
+                        secondaryImage={bnbLogo}
+                        handleOpenModal={handleOpenModal}
+                        lpDeposited={window.depositedLp}
+                      />
+
+                      <DepositedCard
+                        isComingSoon
+                        title="KPOP/BUSD LP"
+                        mainImage={mainImage}
+                        secondaryImage={busdLogo}
+                        handleOpenModal={handleOpenModal}
+                        lpDeposited={0}
+                      />
                     </Row>
                   </div>
                 </div>

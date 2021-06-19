@@ -620,7 +620,7 @@ class App extends Component {
           </div>
         )}
 
-        {/* <Footer /> */}
+        <Footer />
 
         <Modal
           isModalVisible={this.state.isModalVisible}

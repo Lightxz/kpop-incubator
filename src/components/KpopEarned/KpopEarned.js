@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import logo from "../../images/kpop-logo.png";
-import { Row, Col, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import "./KpopEarned.css";
 import NumberFormat from "react-number-format";
 import Web3 from "web3";
