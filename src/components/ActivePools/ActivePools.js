@@ -4,6 +4,7 @@ import Web3 from "web3";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import mainLogo from "../../images/kpop-logo.png";
 import subLogo from "../../images/BNB-logo.png";
+import busdLogo from "../../images/busd-logo.png";
 import NumberFormat from "react-number-format";
 
 class ActivePools extends Component {
@@ -41,206 +42,414 @@ class ActivePools extends Component {
   render() {
     return (
       <section className="active-pools">
-        {/* Medium devices and above only */}
-        <Container className="d-none d-md-block">
-          <p className="kpop-stand-text">Active Incubator</p>
-          <hr />
-          <Row className="d-flex align-items-center">
-            <Col xs={4}>
-              <p className="m-0 header-text">Pool</p>
-            </Col>
-            <Col xs={2}>
-              <p className="m-0 header-text">Emission per Day</p>
-            </Col>
-            <Col xs={2}>
-              <p className="m-0 header-text">ROI</p>
-            </Col>
-            <Col xs={2}>
-              <p className="m-0 header-text">TVL</p>
-            </Col>
-            <Col xs={1} className="d-none d-lg-block">
-              <p className="m-0 header-text"></p>
-            </Col>
-          </Row>
-          <hr />
-          <Row className="d-flex align-items-center py-4">
-            <Col className="pool-container d-flex" xs={4}>
-              <div className="logo-container">
-                <img src={mainLogo} alt="KPOP" className="mainLogo" />
-                <img src={subLogo} className="subLogo" alt="logo" />
-              </div>
+        <Container className="active-pool-content">
+          <div className="active-pool-component">
+            {/* Medium devices and above only */}
+            <div className="d-none d-md-block">
+              <p className="kpop-stand-text">Active Incubator</p>
+              <hr />
+              <Row className="d-flex align-items-center">
+                <Col xs={4}>
+                  <p className="m-0 header-text">Pool</p>
+                </Col>
+                <Col xs={2}>
+                  <p className="m-0 header-text">Emission per Day</p>
+                </Col>
+                <Col xs={2}>
+                  <p className="m-0 header-text">ROI</p>
+                </Col>
+                <Col xs={2}>
+                  <p className="m-0 header-text">TVL</p>
+                </Col>
+                <Col xs={1} className="d-none d-lg-block">
+                  <p className="m-0 header-text"></p>
+                </Col>
+              </Row>
+              <hr />
+              <Row className="d-flex align-items-center py-4">
+                <Col className="pool-container d-flex" xs={4}>
+                  <div className="logo-container">
+                    <img src={mainLogo} alt="KPOP" className="mainLogo" />
+                    <img src={subLogo} className="subLogo" alt="logo" />
+                  </div>
 
-              <div className="d-flex text-container">
-                <p className="header m-0">KPOP/BNB</p>
-                <p className="subheader m-0">Pancakeswap V2</p>
-              </div>
-            </Col>
-            <Col xs={2}>
-              <div className="d-flex text-container m-0">
-                <p className="header m-0">
-                  <NumberFormat
-                    value={this.state.dailyPerThousand}
-                    decimalScale={4}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                  />
-                </p>
-                <p className="subheader m-0">KPOP/day</p>
-              </div>
-            </Col>
-            <Col xs={2}>
-              <div className="d-flex roi-text-container m-0">
-                <p className="m-0">
-                  <strong className="roi-rate">
+                  <div className="d-flex text-container">
+                    <p className="header m-0">KPOP/BNB</p>
+                    <p className="subheader m-0">Pancakeswap V2</p>
+                  </div>
+                </Col>
+                <Col xs={2}>
+                  <div className="d-flex text-container m-0">
+                    <p className="header m-0">
+                      <NumberFormat
+                        value={this.state.dailyPerThousand}
+                        decimalScale={4}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                      />
+                    </p>
+                    <p className="subheader m-0">KPOP/day</p>
+                  </div>
+                </Col>
+                <Col xs={2}>
+                  <div className="d-flex roi-text-container m-0">
+                    <p className="m-0">
+                      <strong className="roi-rate">
+                        <NumberFormat
+                          value={this.state.apy / 365}
+                          decimalScale={2}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          suffix={"%"}
+                        />
+                      </strong>
+                      <span className="roi-freq">Daily</span>
+                    </p>
+                    <p className="m-0">
+                      <strong className="roi-rate">
+                        <NumberFormat
+                          value={this.state.apy / 52}
+                          decimalScale={2}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          suffix={"%"}
+                        />
+                      </strong>
+                      <span className="roi-freq">Weekly</span>
+                    </p>
+                    <p className="m-0">
+                      <strong className="roi-rate">
+                        <NumberFormat
+                          value={this.state.apy}
+                          decimalScale={2}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          suffix={"%"}
+                        />
+                      </strong>
+                      <span className="roi-freq">Annually</span>
+                    </p>
+                  </div>
+                </Col>
+                <Col xs={2}>
+                  <div className="d-flex text-container m-0">
+                    <p className="header m-0">
+                      <NumberFormat
+                        value={this.state.tvl}
+                        decimalScale={2}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      />
+                    </p>
+                  </div>
+                </Col>
+                <Col xs={12} sm={12} md={2} className="text-center p-3">
+                  {/* <a href={"https://bscscan.com/address/"+window.farming_address} > */}
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://kpopfantoken.medium.com/liquidity-mining-with-kpop-fan-token-d847ff6ba64f?postPublishedType=initial"
+                  >
+                    <Button className="incubator-btn">Learn more</Button>
+                  </a>
+                </Col>
+              </Row>
+            </div>
+
+            {/* for medium devices and below only*/}
+            <div className=" d-md-none">
+              <p className="kpop-stand-text">Active Incubator</p>
+              <hr />
+              <div className="pool-container-card">
+                <div className="pool-container d-flex">
+                  <div className="logo-container">
+                    <img src={mainLogo} alt="KPOP" className="mainLogo" />
+                    <img src={subLogo} className="subLogo" alt="logo" />
+                  </div>
+
+                  <div className="d-flex text-container">
+                    <p className="header m-0">KPOP/BNB</p>
+                    <p className="subheader m-0">Pancakeswap V2</p>
+                  </div>
+                </div>
+                <div className="d-flex text-container m-0">
+                  <h2 className="pool-title-header">Emission per Day</h2>
+                  <p className="header m-0">
                     <NumberFormat
-                      value={this.state.apy / 365}
+                      value={this.state.dailyPerThousand}
+                      decimalScale={4}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                    />
+                  </p>
+                  <p className="subheader m-0">KPOP/day</p>
+                </div>
+                <div className="d-flex roi-text-container m-0">
+                  <h2 className="pool-title-header">ROI</h2>
+                  <p className="m-0">
+                    <strong className="roi-rate">
+                      <NumberFormat
+                        value={this.state.apy / 365}
+                        decimalScale={2}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        suffix={"%"}
+                      />
+                    </strong>
+                    <span className="roi-freq">Daily</span>
+                  </p>
+                  <p className="m-0">
+                    <strong className="roi-rate">
+                      <NumberFormat
+                        value={this.state.apy / 52}
+                        decimalScale={2}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        suffix={"%"}
+                      />
+                    </strong>
+                    <span className="roi-freq">Weekly</span>
+                  </p>
+                  <p className="m-0">
+                    <strong className="roi-rate">
+                      <NumberFormat
+                        value={this.state.apy}
+                        decimalScale={2}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        suffix={"%"}
+                      />
+                    </strong>
+                    <span className="roi-freq">Annually</span>
+                  </p>
+                </div>
+                <div>
+                  <h2 className="pool-title-header">TVL</h2>
+                  <p className="header m-0 text-white">
+                    <NumberFormat
+                      value={this.state.tvl}
                       decimalScale={2}
                       displayType={"text"}
                       thousandSeparator={true}
-                      suffix={"%"}
+                      prefix={"$"}
                     />
-                  </strong>
-                  <span className="roi-freq">Daily</span>
-                </p>
-                <p className="m-0">
-                  <strong className="roi-rate">
-                    <NumberFormat
-                      value={this.state.apy / 52}
-                      decimalScale={2}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      suffix={"%"}
-                    />
-                  </strong>
-                  <span className="roi-freq">Weekly</span>
-                </p>
-                <p className="m-0">
-                  <strong className="roi-rate">
-                    <NumberFormat
-                      value={this.state.apy}
-                      decimalScale={2}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      suffix={"%"}
-                    />
-                  </strong>
-                  <span className="roi-freq">Annually</span>
-                </p>
+                  </p>
+                </div>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://kpopfantoken.medium.com/liquidity-mining-with-kpop-fan-token-d847ff6ba64f?postPublishedType=initial"
+                  className="d-flex justify-content-center m-3 learn-more-button-link"
+                >
+                  <Button className="incubator-btn">Learn more</Button>
+                </a>
               </div>
-            </Col>
-            <Col xs={2}>
-              <div className="d-flex text-container m-0">
-                <p className="header m-0">
-                  <NumberFormat
-                    value={this.state.tvl}
-                    decimalScale={2}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                </p>
-              </div>
-            </Col>
-            <Col xs={12} sm={12} md={2} className="text-center p-3">
-              {/* <a href={"https://bscscan.com/address/"+window.farming_address} > */}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://kpopfantoken.medium.com/liquidity-mining-with-kpop-fan-token-d847ff6ba64f?postPublishedType=initial"
-              >
-                <Button className="incubator-btn">Learn more</Button>
-              </a>
-            </Col>
-          </Row>
-        </Container>
+            </div>
+          </div>
 
-        {/* for medium devices and below only*/}
-        <Container className=" d-md-none">
-          <p className="kpop-stand-text">Active Incubator</p>
-          <hr />
-          <div className="pool-container-card">
-            <div className="pool-container d-flex">
-              <div className="logo-container">
-                <img src={mainLogo} alt="KPOP" className="mainLogo" />
-                <img src={subLogo} className="subLogo" alt="logo" />
+          {/* NEW POOL */}
+          <div className="active-pool-component">
+            <div className="coming-soon-overlay">
+              <h1>Coming soon</h1>
+            </div>
+            {/* Medium devices and above only */}
+            <div className="blurred-bg">
+              <div className="d-none d-md-block">
+                <Row className="d-flex align-items-center py-4">
+                  <Col className="pool-container d-flex" xs={4}>
+                    <div className="logo-container">
+                      <img src={mainLogo} alt="KPOP" className="mainLogo" />
+                      <img src={busdLogo} className="subLogo" alt="logo" />
+                    </div>
+
+                    <div className="d-flex text-container">
+                      <p className="header m-0">KPOP/BUSD</p>
+                      <p className="subheader m-0">Pancakeswap V2</p>
+                    </div>
+                  </Col>
+                  <Col xs={2} className="low-visibility">
+                    <div className="d-flex text-container m-0">
+                      <p className="header m-0">
+                        123,432.4321
+                        {/* <NumberFormat
+                        value={this.state.dailyPerThousand}
+                        decimalScale={4}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                      /> */}
+                      </p>
+                      <p className="subheader m-0">KPOP/day</p>
+                    </div>
+                  </Col>
+                  <Col xs={2} className="low-visibility">
+                    <div className="d-flex roi-text-container m-0">
+                      <p className="m-0">
+                        <strong className="roi-rate">
+                          2.00%
+                          {/* <NumberFormat
+                          value={this.state.apy / 365}
+                          decimalScale={2}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          suffix={"%"}
+                        /> */}
+                        </strong>
+                        <span className="roi-freq">Daily</span>
+                      </p>
+                      <p className="m-0">
+                        <strong className="roi-rate">
+                          10.00%
+                          {/* <NumberFormat
+                          value={this.state.apy / 52}
+                          decimalScale={2}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          suffix={"%"}
+                        /> */}
+                        </strong>
+                        <span className="roi-freq">Weekly</span>
+                      </p>
+                      <p className="m-0">
+                        <strong className="roi-rate">
+                          500.00%
+                          {/* <NumberFormat
+                          value={this.state.apy}
+                          decimalScale={2}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          suffix={"%"}
+                        /> */}
+                        </strong>
+                        <span className="roi-freq">Annually</span>
+                      </p>
+                    </div>
+                  </Col>
+                  <Col xs={2} className="low-visibility">
+                    <div className="d-flex text-container m-0">
+                      <p className="header m-0">
+                        $300,000.00
+                        {/* <NumberFormat
+                        value={this.state.tvl}
+                        decimalScale={2}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      /> */}
+                      </p>
+                    </div>
+                  </Col>
+                  <Col
+                    xs={12}
+                    sm={12}
+                    md={2}
+                    className="text-center p-3 low-visibility"
+                  >
+                    {/* <a href={"https://bscscan.com/address/"+window.farming_address} > */}
+                    {/* <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://kpopfantoken.medium.com/liquidity-mining-with-kpop-fan-token-d847ff6ba64f?postPublishedType=initial"
+                  >
+                    <Button className="incubator-btn">Learn more</Button>
+                  </a> */}
+                  </Col>
+                </Row>
               </div>
 
-              <div className="d-flex text-container">
-                <p className="header m-0">KPOP/BNB</p>
-                <p className="subheader m-0">Pancakeswap V2</p>
+              {/* for medium devices and below only*/}
+              <div className=" d-md-none">
+                <div className="pool-container-card">
+                  <div className="pool-container d-flex">
+                    <div className="logo-container">
+                      <img src={mainLogo} alt="KPOP" className="mainLogo" />
+                      <img src={busdLogo} className="subLogo" alt="logo" />
+                    </div>
+
+                    <div className="d-flex text-container">
+                      <p className="header m-0">KPOP/BUSD</p>
+                      <p className="subheader m-0">Pancakeswap V2</p>
+                    </div>
+                  </div>
+                  <div className="d-flex text-container m-0 low-visibility">
+                    <h2 className="pool-title-header">Emission per Day</h2>
+                    <p className="header m-0">
+                      123,3213.0923
+                      {/* <NumberFormat
+                        value={this.state.dailyPerThousand}
+                        decimalScale={4}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                      /> */}
+                    </p>
+                    <p className="subheader m-0">KPOP/day</p>
+                  </div>
+                  <div className="d-flex roi-text-container m-0 low-visibility">
+                    <h2 className="pool-title-header">ROI</h2>
+                    <p className="m-0">
+                      <strong className="roi-rate">
+                        2.00%
+                        {/* <NumberFormat
+                          value={this.state.apy / 365}
+                          decimalScale={2}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          suffix={"%"}
+                        /> */}
+                      </strong>
+                      <span className="roi-freq">Daily</span>
+                    </p>
+                    <p className="m-0">
+                      <strong className="roi-rate">
+                        10.00%
+                        {/* <NumberFormat
+                          value={this.state.apy / 52}
+                          decimalScale={2}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          suffix={"%"}
+                        /> */}
+                      </strong>
+                      <span className="roi-freq">Weekly</span>
+                    </p>
+                    <p className="m-0">
+                      <strong className="roi-rate">
+                        500.00%
+                        {/* <NumberFormat
+                          value={this.state.apy}
+                          decimalScale={2}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          suffix={"%"}
+                        /> */}
+                      </strong>
+                      <span className="roi-freq">Annually</span>
+                    </p>
+                  </div>
+                  <div className="low-visibility">
+                    <h2 className="pool-title-header">TVL</h2>
+                    <p className="header m-0 text-white">
+                      $300,000.00
+                      {/* <NumberFormat
+                        value={this.state.tvl}
+                        decimalScale={2}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"$"}
+                      /> */}
+                    </p>
+                  </div>
+                  {/* <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://kpopfantoken.medium.com/liquidity-mining-with-kpop-fan-token-d847ff6ba64f?postPublishedType=initial"
+                    className="d-flex justify-content-center m-3 learn-more-button-link"
+                  >
+                    <Button className="incubator-btn">Learn more</Button>
+                  </a> */}
+                </div>
               </div>
             </div>
-            <div className="d-flex text-container m-0">
-              <h2 className="pool-title-header">Emission per Day</h2>
-              <p className="header m-0">
-                <NumberFormat
-                  value={this.state.dailyPerThousand}
-                  decimalScale={4}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                />
-              </p>
-              <p className="subheader m-0">KPOP/day</p>
-            </div>
-            <div className="d-flex roi-text-container m-0">
-              <h2 className="pool-title-header">ROI</h2>
-              <p className="m-0">
-                <strong className="roi-rate">
-                  <NumberFormat
-                    value={this.state.apy / 365}
-                    decimalScale={2}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    suffix={"%"}
-                  />
-                </strong>
-                <span className="roi-freq">Daily</span>
-              </p>
-              <p className="m-0">
-                <strong className="roi-rate">
-                  <NumberFormat
-                    value={this.state.apy / 52}
-                    decimalScale={2}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    suffix={"%"}
-                  />
-                </strong>
-                <span className="roi-freq">Weekly</span>
-              </p>
-              <p className="m-0">
-                <strong className="roi-rate">
-                  <NumberFormat
-                    value={this.state.apy}
-                    decimalScale={2}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    suffix={"%"}
-                  />
-                </strong>
-                <span className="roi-freq">Annually</span>
-              </p>
-            </div>
-            <div>
-              <h2 className="pool-title-header">TVL</h2>
-              <p className="header m-0 text-white">
-                <NumberFormat
-                  value={this.state.tvl}
-                  decimalScale={2}
-                  displayType={"text"}
-                  thousandSeparator={true}
-                  prefix={"$"}
-                />
-              </p>
-            </div>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://kpopfantoken.medium.com/liquidity-mining-with-kpop-fan-token-d847ff6ba64f?postPublishedType=initial"
-              className="d-flex justify-content-center m-3 learn-more-button-link"
-            >
-              <Button className="incubator-btn">Learn more</Button>
-            </a>
           </div>
         </Container>
       </section>
