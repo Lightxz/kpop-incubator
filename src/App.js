@@ -6,8 +6,6 @@ import KpopStand from "./layouts/KpopStand/KpopStand";
 import ActivePools from "./components/ActivePools/ActivePools";
 import Footer from "./components/Footer/Footer";
 import Web3 from "web3";
-// Components
-import Modal from "./components/Modal/Modal";
 import Loading from "./components/Loading/Loading";
 
 window.erc20_abi = [
@@ -474,20 +472,20 @@ window.farming_abi = [
     type: "function",
   },
 ];
-window.farming_address = "0xF9C6b9a271fbf2997D03490437614E5253c65BF6";
+
+window.KPOP_BNB_FARMING_ADDRESS = "0xF9C6b9a271fbf2997D03490437614E5253c65BF6";
+window.KPOP_BNB_SMART_CONTRACT = "0x83ca76bdc2e454e362826c25b8f4abd0791bb594";
+window.KPOP_FAN_TOKEN_ADDRESS = "0x3Ba2b1C2c46200e826C56550ff7a2b29bad10F3d";
+window.BND_BUSD_LP_ADDRESS = "0x1B96B92314C44b159149f7E0303511fB2Fc4774f";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isModalVisible: false,
-      modalType: "STAKE",
       walletConnected: false,
       isLoading: true,
     };
     this.handleConnect = this.handleConnect.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.handleOpenModal = this.handleOpenModal.bind(this);
   }
 
   async handleConnect() {
@@ -524,35 +522,30 @@ class App extends Component {
     // Set default account
     let accounts = await web3.eth.getAccounts();
     window.account = accounts[0];
-    document.getElementById("connectButton").innerHTML =
-      window.account.substring(0, 5) +
-      "..." +
-      window.account.substring(
-        window.account.length - 4,
-        window.account.length
-      );
+
     window.w3 = web3;
 
     // get bnb price:
     let wbnb = new web3.eth.Contract(window.erc20_abi, wbnb_address);
     let busd = new web3.eth.Contract(window.erc20_abi, busd_address);
     let bnbBalance = await wbnb.methods
-      .balanceOf("0x1B96B92314C44b159149f7E0303511fB2Fc4774f")
+      .balanceOf(window.BND_BUSD_LP_ADDRESS)
       .call();
     let busdBalance = await busd.methods
-      .balanceOf("0x1B96B92314C44b159149f7E0303511fB2Fc4774f")
+      .balanceOf(window.BND_BUSD_LP_ADDRESS)
       .call();
     let bnbPrice = busdBalance / bnbBalance;
+
     // get kpop price in bnb:
     let mytoken = new web3.eth.Contract(
       window.erc20_abi,
-      "0x3Ba2b1C2c46200e826C56550ff7a2b29bad10F3d"
+      window.KPOP_FAN_TOKEN_ADDRESS
     );
     let bnbPoolBalance = await wbnb.methods
-      .balanceOf("0x83ca76bdc2e454e362826c25b8f4abd0791bb594")
+      .balanceOf(window.KPOP_BNB_SMART_CONTRACT)
       .call();
     let tokenPoolBalance = await mytoken.methods
-      .balanceOf("0x83ca76bdc2e454e362826c25b8f4abd0791bb594")
+      .balanceOf(window.KPOP_BNB_SMART_CONTRACT)
       .call();
     let tokenBnbPrice = bnbPoolBalance / tokenPoolBalance;
     window.kpopUsdPrice = bnbPrice * tokenBnbPrice;
@@ -560,7 +553,7 @@ class App extends Component {
     // Calculate Lp token value:
     let lpToken = new web3.eth.Contract(
       window.erc20_abi,
-      "0x83Ca76Bdc2e454E362826c25b8F4Abd0791Bb594"
+      window.KPOP_BNB_SMART_CONTRACT
     );
     let totalLPtSupply = await lpToken.methods.totalSupply().call();
     window.lptValue = ((bnbPoolBalance * 2) / totalLPtSupply) * bnbPrice;
@@ -572,7 +565,7 @@ class App extends Component {
     // Get deposited lp tokens:
     let myContract = new web3.eth.Contract(
       window.farming_abi,
-      window.farming_address
+      window.KPOP_BNB_FARMING_ADDRESS
     );
     let d = await myContract.methods.balanceOf(window.account).call();
     let deposited = Web3.utils.fromWei(d);
@@ -608,7 +601,10 @@ class App extends Component {
       <div className="App">
         {this.state.isLoading && <Loading />}
         {/* {false && <Loading />} */}
-        <Navbar handleConnect={this.handleConnect} />
+        <Navbar
+          handleConnect={this.handleConnect}
+          isWalletConnected={this.state.walletConnected}
+        />
         <Landing />
         {!this.state.walletConnected ? (
           // {false ? (
@@ -621,12 +617,6 @@ class App extends Component {
         )}
 
         <Footer />
-
-        <Modal
-          isModalVisible={this.state.isModalVisible}
-          handleClose={this.handleCloseModal}
-          modalType={this.state.modalType}
-        />
       </div>
     );
   }

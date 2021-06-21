@@ -16,7 +16,7 @@ class KpopEarned extends Component {
     let _web3 = window.w3;
     let myContract = new _web3.eth.Contract(
       window.farming_abi,
-      window.farming_address
+      window.KPOP_BNB_FARMING_ADDRESS
     );
     let e = await myContract.methods.earned(window.account).call();
     let earned = Web3.utils.fromWei(e);
@@ -27,7 +27,7 @@ class KpopEarned extends Component {
     let _web3 = window.w3;
     let myContract = new _web3.eth.Contract(
       window.farming_abi,
-      window.farming_address
+      window.KPOP_BNB_FARMING_ADDRESS
     );
     await myContract.methods.getReward().send({
       from: window.account,
@@ -43,7 +43,7 @@ class KpopEarned extends Component {
           <p className="mb-4 kpop-earned-label">BSC</p>
         </div>
         <EarnedCard
-          kpopEarned={this.state.kpopEarned || "21343434.234234"}
+          kpopEarned={this.state.kpopEarned}
           handleClaim={this.claim}
         />
       </>

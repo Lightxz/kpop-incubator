@@ -9,7 +9,12 @@ import bscanLogo from "../../images/bscan-logo.jpeg";
 import dextoolsLogo from "../../images/dextools-logo.png";
 
 function Navbar(props) {
-  const { handleConnect } = props;
+  const { handleConnect, isWalletConnected } = props;
+  const userAccountId =
+    window.account?.substring(0, 5) +
+    "..." +
+    window.account?.substring(window.account.length - 4, window.account.length);
+
   return (
     <>
       <div className="announcement-container">
@@ -54,9 +59,13 @@ function Navbar(props) {
           </Nav.Item>
 
           <Nav.Item>
-            <Nav.Link onClick={handleConnect}>
-              <span id="connectButton">Start Incubator</span>
-            </Nav.Link>
+            {isWalletConnected ? (
+              <Nav.Link onClick={(e) => e.preventDefault()}>
+                {userAccountId}
+              </Nav.Link>
+            ) : (
+              <Nav.Link onClick={handleConnect}>Start Incubator</Nav.Link>
+            )}
           </Nav.Item>
         </Container>
       </Nav>

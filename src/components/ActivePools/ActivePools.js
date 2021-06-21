@@ -22,10 +22,10 @@ class ActivePools extends Component {
     let web3 = window.w3;
     let lpToken = new web3.eth.Contract(
       window.erc20_abi,
-      "0x83Ca76Bdc2e454E362826c25b8F4Abd0791Bb594"
+      window.KPOP_BNB_SMART_CONTRACT
     );
     let totalLPLocked = await lpToken.methods
-      .balanceOf(window.farming_address)
+      .balanceOf(window.KPOP_BNB_FARMING_ADDRESS)
       .call();
     totalLPLocked = Web3.utils.fromWei(totalLPLocked);
     this.setState({ tvl: totalLPLocked * window.lptValue });
