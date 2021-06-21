@@ -1,0 +1,90 @@
+.kpop-earned-container {
+  display: flex;
+  padding: 2rem;
+  flex-wrap: wrap;
+  /* border: 2px solid red;
+  border-radius: 5px;
+  margin: 1rem;
+  border: 1px solid #878c92;
+  min-width: 33rem;
+  max-width: 40rem;
+  width: 100%; */
+}
+
+.kpop-earned-information-container {
+  flex: 2;
+}
+
+.kpop-earned-button-container {
+  flex: 1;
+}
+
+.kpop-earned-information {
+  display: flex;
+  align-items: center;
+}
+
+.kpop-earned-data-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.kpop-earned-bal {
+  color: #fff !important;
+}
+
+.kpop-earned-bal p {
+  font-weight: 500;
+}
+
+.kpop-earned-bal small {
+  font-weight: 100;
+}
+
+.claim-btn {
+  border: 1px solid #878c92 !important;
+  background-color: transparent !important;
+  color: #ff45a0 !important;
+  font-size: 1.6rem !important;
+  padding: 5px 50px !important;
+  border-radius: 5px !important;
+  margin: auto;
+}
+
+.earned-logo {
+  width: 5rem;
+  height: 5rem;
+  margin-right: 1rem;
+}
+
+.kpop-token-earned {
+  font-size: 2rem;
+}
+
+.kpop-usd-earned {
+  font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .kpop-earned-container {
+    padding: 0;
+  }
+
+  .claim-btn {
+    padding: 5px 20px !important;
+  }
+
+  .kpop-earned-bal p {
+    font-size: 2rem;
+  }
+
+  .kpop-earned-bal small {
+    font-size: 1.8rem;
+  }
+
+  .earned-logo {
+    width: 4rem;
+    height: 4rem;
+    margin-right: 0.5rem;
+  }
+}

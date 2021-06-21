@@ -4,7 +4,14 @@ import { Col, Button } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 
 const DepositedCard = (props) => {
-  const { lpDeposited, isComingSoon, mainImage, secondaryImage, title } = props;
+  const {
+    lpDeposited,
+    isComingSoon,
+    mainImage,
+    secondaryImage,
+    title,
+    handleOpenModal,
+  } = props;
 
   return (
     <Col style={{ position: "relative" }}>
@@ -49,13 +56,13 @@ const DepositedCard = (props) => {
           <div className="deposited-btn-container">
             <Button
               className="deposited-btn"
-              onClick={() => this.props.handleOpenModal("STAKE")}
+              onClick={() => handleOpenModal("STAKE")}
             >
               Stake
             </Button>
             <Button
               className="deposited-btn"
-              onClick={() => this.props.handleOpenModal("UNSTAKE")}
+              onClick={() => handleOpenModal("UNSTAKE")}
             >
               Unstake
             </Button>

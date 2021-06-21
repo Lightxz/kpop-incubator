@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import logo from "../../images/kpop-logo.png";
-import { Button } from "react-bootstrap";
 import "./KpopEarned.css";
-import NumberFormat from "react-number-format";
 import Web3 from "web3";
+import EarnedCard from "../EarnedCard/EarnedCard";
 
 class KpopEarned extends Component {
   constructor(props) {
@@ -44,39 +42,10 @@ class KpopEarned extends Component {
           <p className="kpop-earned-label">KPOP Earned</p>
           <p className="mb-4 kpop-earned-label">BSC</p>
         </div>
-        <div className="kpop-earned-container">
-          <div className="kpop-earned-information-container">
-            <div className="kpop-earned-information">
-              <img className="earned-logo" src={logo} alt="logo" />
-              <div className="kpop-earned-data-container">
-                <p className="mb-0 kpop-token-earned">
-                  <NumberFormat
-                    value={this.state.kpopEarned}
-                    decimalScale={4}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    suffix={" KPOP"}
-                  />
-                </p>
-                <small className="kpop-usd-earned">
-                  <NumberFormat
-                    value={this.state.kpopEarned * window.kpopUsdPrice}
-                    decimalScale={4}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    prefix={"$"}
-                  />
-                </small>
-              </div>
-            </div>
-          </div>
-
-          <div className="kpop-earned-button-container  text-end">
-            <Button className="claim-btn" onClick={this.claim}>
-              Claim
-            </Button>
-          </div>
-        </div>
+        <EarnedCard
+          kpopEarned={this.state.kpopEarned || "21343434.234234"}
+          handleClaim={this.claim}
+        />
       </>
     );
   }
