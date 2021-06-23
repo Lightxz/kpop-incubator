@@ -478,6 +478,9 @@ window.KPOP_BNB_SMART_CONTRACT = "0x83ca76bdc2e454e362826c25b8f4abd0791bb594";
 window.KPOP_FAN_TOKEN_ADDRESS = "0x3Ba2b1C2c46200e826C56550ff7a2b29bad10F3d";
 window.BND_BUSD_LP_ADDRESS = "0x1B96B92314C44b159149f7E0303511fB2Fc4774f";
 
+window.KPOP_BUSD_FARMING_ADDRESS = "0x9a74B9e221D6D13C1ffe341c797072514E8f617c";
+window.KPOP_BUSD_SMART_CONTRACT = "0x9484201A78FBE9B75A145044d4a1b50d2d7A360F";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -534,6 +537,7 @@ class App extends Component {
     let busdBalance = await busd.methods
       .balanceOf(window.BND_BUSD_LP_ADDRESS)
       .call();
+
     let bnbPrice = busdBalance / bnbBalance;
 
     // get kpop price in bnb:
@@ -570,6 +574,37 @@ class App extends Component {
     let d = await myContract.methods.balanceOf(window.account).call();
     let deposited = Web3.utils.fromWei(d);
     window.depositedLp = deposited;
+
+    // --------- KPOP/BUSD -----------
+
+    let BUSD_poolBalance = await wbnb.methods
+      .balanceOf(window.KPOP_BUSD_SMART_CONTRACT)
+      .call();
+
+    // Calculate Lp token value:
+    let BUSD_lpToken = new web3.eth.Contract(
+      window.erc20_abi,
+      window.KPOP_BUSD_SMART_CONTRACT
+    );
+    let BUSD_totalLPtSupply = await BUSD_lpToken.methods.totalSupply().call();
+    window.BUSD_lptValue =
+      ((BUSD_poolBalance * 2) / BUSD_totalLPtSupply) * busdBalance;
+
+    // Get lp token balance:
+    let BUSD_myBalance = await BUSD_lpToken.methods
+      .balanceOf(window.account)
+      .call();
+    window.BUSD_lpBalance = Web3.utils.fromWei(BUSD_myBalance);
+
+    // Get deposited lp tokens:
+    let BUSD_myContract = new web3.eth.Contract(
+      window.farming_abi,
+      window.KPOP_BUSD_FARMING_ADDRESS
+    );
+    let BUSD_d = await BUSD_myContract.methods.balanceOf(window.account).call();
+    let BUSD_deposited = Web3.utils.fromWei(BUSD_d);
+    window.BUSD_depositedLp = BUSD_deposited;
+    // -------------------------------
 
     this.setState({ walletConnected: true, isLoading: false });
   }

@@ -14,12 +14,16 @@ class ActivePools extends Component {
       tvl: 0,
       annualRoi: 0,
       dailyPerThousand: 0,
+      BUSD_tvl: 0,
+      BUSD_annualRoi: 0,
+      BUSD_dailyPerThousand: 0,
     };
   }
 
   async componentDidMount() {
-    // calculate tvl
     let web3 = window.w3;
+    // KPOP/BNB
+    // calculate tvl
     let lpToken = new web3.eth.Contract(
       window.erc20_abi,
       window.KPOP_BNB_SMART_CONTRACT
@@ -37,6 +41,38 @@ class ActivePools extends Component {
     this.setState({
       dailyPerThousand:
         ((this.state.annualRoi / 100) * 1000) / window.kpopUsdPrice,
+    });
+
+    // KPOP/BUSD
+    // calculate tvl
+    let BUSD_lpToken = new web3.eth.Contract(
+      window.erc20_abi,
+      window.KPOP_BUSD_SMART_CONTRACT
+    );
+
+    let BUSD_totalLPLocked = await BUSD_lpToken.methods
+      .balanceOf(window.KPOP_BUSD_FARMING_ADDRESS)
+      .call();
+
+    BUSD_totalLPLocked = Web3.utils.fromWei(BUSD_totalLPLocked);
+    this.setState({ BUSD_tvl: BUSD_totalLPLocked * window.BUSD_lptValue });
+
+    const BUSD_annualRoi_computation =
+      ((60000000 * window.kpopUsdPrice) / this.state.BUSD_tvl) * 100;
+
+    const BUSD_annualRoi_value =
+      BUSD_annualRoi_computation === "Infinity"
+        ? BUSD_annualRoi_computation
+        : 0;
+
+    // calculate yearly apy (yearly kpop distributed value / total locked value)
+    this.setState({
+      BUSD_annualRoi: BUSD_annualRoi_value,
+    });
+    // set daily rewards per thousend $
+    this.setState({
+      BUSD_dailyPerThousand:
+        ((this.state.BUSD_annualRoi / 100) * 1000) / window.kpopUsdPrice,
     });
   }
 
@@ -78,13 +114,13 @@ class ActivePools extends Component {
           />
 
           <ActivePool
-            isComingSoon
+            isComingSoon={false}
             title="KPOP/BUSD"
             mainImage={mainLogo}
             secondaryImage={busdLogo}
-            emissionPerDay={"12342332.4321123123123"}
-            annualRoi={"560"}
-            tvl={"2381237684.213124"}
+            emissionPerDay={this.state.BUSD_dailyPerThousand}
+            annualRoi={this.state.BUSD_annualRoi}
+            tvl={this.state.BUSD_tvl}
             // learnMoreLink="https://kpopfantoken.medium.com/liquidity-mining-with-kpop-fan-token-d847ff6ba64f?postPublishedType=initial"
           />
         </Container>

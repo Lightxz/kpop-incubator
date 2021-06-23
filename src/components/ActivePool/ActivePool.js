@@ -24,7 +24,7 @@ const ActivePool = (props) => {
       )}
 
       {/* Medium devices and above only */}
-      <div className={isComingSoon && "blurred-bg"}>
+      <div className={isComingSoon ? "blurred-bg" : undefined}>
         <div className="d-none d-md-block">
           <Row className="d-flex align-items-center py-4">
             <Col className="pool-container d-flex" xs={4}>
@@ -42,7 +42,7 @@ const ActivePool = (props) => {
                 <p className="subheader m-0">Pancakeswap</p>
               </div>
             </Col>
-            <Col xs={2} className={isComingSoon && "low-visibility"}>
+            <Col xs={2} className={isComingSoon ? "low-visibility" : undefined}>
               <div className="d-flex text-container m-0">
                 <p className="header m-0">
                   <NumberFormat
@@ -55,7 +55,7 @@ const ActivePool = (props) => {
                 <p className="subheader m-0">KPOP/day</p>
               </div>
             </Col>
-            <Col xs={2} className={isComingSoon && "low-visibility"}>
+            <Col xs={2} className={isComingSoon ? "low-visibility" : undefined}>
               <div className="d-flex roi-text-container m-0">
                 <p className="m-0">
                   <strong className="roi-rate">
@@ -95,7 +95,7 @@ const ActivePool = (props) => {
                 </p>
               </div>
             </Col>
-            <Col xs={2} className={isComingSoon && "low-visibility"}>
+            <Col xs={2} className={isComingSoon ? "low-visibility" : undefined}>
               <div className="d-flex text-container m-0">
                 <p className="header m-0">
                   <NumberFormat
@@ -112,7 +112,9 @@ const ActivePool = (props) => {
               xs={12}
               sm={12}
               md={2}
-              className={`text-center p-3  ${isComingSoon && "low-visibility"}`}
+              className={`text-center p-3  ${
+                isComingSoon ? "low-visibility" : undefined
+              }`}
             >
               {learnMoreLink && (
                 <a
@@ -143,7 +145,7 @@ const ActivePool = (props) => {
             </div>
             <div
               className={`d-flex text-container m-0 ${
-                isComingSoon && "low-visibility"
+                isComingSoon ? "low-visibility" : undefined
               }`}
             >
               <h2 className="pool-title-header">Emission per Day</h2>
@@ -159,7 +161,7 @@ const ActivePool = (props) => {
             </div>
             <div
               className={`d-flex roi-text-container m-0 ${
-                isComingSoon && "low-visibility"
+                isComingSoon ? "low-visibility" : undefined
               }`}
             >
               <h2 className="pool-title-header">ROI</h2>
@@ -200,7 +202,7 @@ const ActivePool = (props) => {
                 <span className="roi-freq">Annually</span>
               </p>
             </div>
-            <div className={isComingSoon && "low-visibility"}>
+            <div className={isComingSoon ? "low-visibility" : undefined}>
               <h2 className="pool-title-header">TVL</h2>
               <p className="header m-0 text-white">
                 <NumberFormat

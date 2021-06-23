@@ -63,16 +63,24 @@ function KpopStand(props) {
                         mainImage={mainImage}
                         secondaryImage={bnbLogo}
                         handleOpenModal={handleOpenModal}
-                        lpDeposited={window.depositedLp}
+                        availableBalance={window.lpBalance}
+                        withdrawableBalance={window.depositedLp}
+                        smart_contract={window.KPOP_BNB_SMART_CONTRACT}
+                        farming_address={window.KPOP_BNB_FARMING_ADDRESS}
+                        lptValue={window.lptValue}
                       />
 
                       <DepositedCard
-                        isComingSoon
+                        isComingSoon={false}
                         title="KPOP/BUSD LP"
                         mainImage={mainImage}
                         secondaryImage={busdLogo}
                         handleOpenModal={handleOpenModal}
-                        lpDeposited={0}
+                        availableBalance={window.BUSD_lpBalance}
+                        withdrawableBalance={window.BUSD_depositedLp}
+                        smart_contract={window.KPOP_BUSD_SMART_CONTRACT}
+                        farming_address={window.KPOP_BUSD_FARMING_ADDRESS}
+                        lptValue={window.BUSD_lptValue}
                       />
                     </Row>
                   </div>
