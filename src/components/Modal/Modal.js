@@ -30,24 +30,26 @@ function ModalComponent(props) {
     handleClose();
   };
 
-  const isButtonDisabled =
-    amount > (isModalTypeStake ? availableBalance : withdrawableBalance);
+  const isDepositButtonDisabled =
+    amount > availableBalance || amount === 0 || amount === "";
 
+  const isWithdrawButtonDisabled =
+    amount > withdrawableBalance || amount === 0 || amount === "";
   const modalActionButton = isModalTypeStake ? (
     <Button
       onClick={handleDeposit}
-      className={`actionButton ${
-        (isButtonDisabled || availableBalance == 0) && "button-disabled"
-      }`}
-      disabled={isButtonDisabled || availableBalance == 0}
+      className={`actionButton ${isDepositButtonDisabled && "button-disabled"}`}
+      disabled={isDepositButtonDisabled}
     >
       Deposit
     </Button>
   ) : (
     <Button
       onClick={handleWithdrawal}
-      className={`actionButton ${isButtonDisabled && "button-disabled"}`}
-      disabled={isButtonDisabled}
+      className={`actionButton ${
+        isWithdrawButtonDisabled && "button-disabled"
+      }`}
+      disabled={isWithdrawButtonDisabled}
     >
       Withdraw
     </Button>
@@ -98,7 +100,7 @@ function ModalComponent(props) {
         <p>Amount</p>
         <InputGroup className="mb-3">
           <FormControl
-            placeholder="Amount"
+            placeholder="Enter amount here"
             onChange={handleChange}
             value={amount}
             className="modalInput"

@@ -36,8 +36,8 @@ class KpopEarned extends Component {
     let BUSD_earned = Web3.utils.fromWei(BUSD_e);
     this.setState({
       isLoading: false,
-      BNB_kpopEarned: BNB_earned,
-      BUSD_kpopEarned: BUSD_earned,
+      BNB_kpopEarned: Number(BNB_earned),
+      BUSD_kpopEarned: Number(BUSD_earned),
     });
   }
 

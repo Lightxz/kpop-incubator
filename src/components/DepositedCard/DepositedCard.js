@@ -4,6 +4,8 @@ import { Col, Button } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import Modal from "../Modal/Modal";
 import Web3 from "web3";
+import Toast from "react-bootstrap/Toast";
+import { XOctagon, AlertTriangle } from "react-feather";
 
 // Component
 import Loading from "../Loading/Loading";
@@ -27,6 +29,17 @@ const DepositedCard = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState(0);
 
+  const [showToast, setShowToast] = useState(false);
+  const [message, setMessage] = useState("Error");
+  const [variant, setVariant] = useState("error");
+
+  const Icon =
+    variant === "info" ? (
+      <AlertTriangle className="toast-icon-info" />
+    ) : (
+      <XOctagon className="toast-icon-error" />
+    );
+
   const _web3 = window.w3;
   const myContract = new _web3.eth.Contract(
     window.farming_abi,
@@ -40,44 +53,61 @@ const DepositedCard = (props) => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleErrorMessage = ({ message }) => {
+    setAmount(0);
+    setIsModalOpen(false);
     setIsLoading(false);
+    setVariant("error");
+    setMessage(message);
+    setShowToast(true);
   };
 
   const handleDeposit = async () => {
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
 
-    let myToken = new _web3.eth.Contract(window.erc20_abi, smart_contract);
+      let myToken = new _web3.eth.Contract(window.erc20_abi, smart_contract);
+      let approvedAmount = await myToken.methods
+        .allowance(window.account, farming_address)
+        .call();
+      approvedAmount = Web3.utils.fromWei(approvedAmount);
 
-    let approvedAmount = await myToken.methods
-      .allowance(window.account, farming_address)
-      .call();
-    approvedAmount = Web3.utils.fromWei(approvedAmount);
+      if (approvedAmount < amount) {
+        await myToken.methods
+          .approve(farming_address, Web3.utils.toWei("1000000000000000000"))
+          .send({
+            from: window.account,
+          });
+      }
 
-    if (approvedAmount < amount) {
-      await myToken.methods
-        .approve(farming_address, Web3.utils.toWei("1000000000000000000"))
-        .send({
-          from: window.account,
-        });
+      await myContract.methods.stake(Web3.utils.toWei(amount.toString())).send({
+        from: window.account,
+      });
+
+      handleCloseModal();
+      setIsLoading(false);
+      window.location.reload();
+    } catch (e) {
+      handleErrorMessage(e);
     }
-
-    await myContract.methods.stake(Web3.utils.toWei(amount.toString())).send({
-      from: window.account,
-    });
-
-    handleCloseModal();
-    window.location.reload();
   };
 
   const handleWithdrawal = async () => {
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
+      await myContract.methods
+        .unstake(Web3.utils.toWei(amount.toString()))
+        .send({
+          from: window.account,
+        });
 
-    await myContract.methods.unstake(Web3.utils.toWei(amount.toString())).send({
-      from: window.account,
-    });
-
-    handleCloseModal();
-    window.location.reload();
+      setIsLoading(false);
+      window.location.reload();
+    } catch (e) {
+      handleErrorMessage(e);
+    }
   };
 
   return (
@@ -152,6 +182,18 @@ const DepositedCard = (props) => {
         availableBalance={availableBalance}
         withdrawableBalance={withdrawableBalance}
       />
+
+      {/* Toast Message */}
+      <Toast
+        onClose={() => setShowToast(false)}
+        show={showToast}
+        delay={3000}
+        autohide
+      >
+        <Toast.Body className={`toast-${variant}`}>
+          {Icon} {message}
+        </Toast.Body>
+      </Toast>
     </Col>
   );
 };

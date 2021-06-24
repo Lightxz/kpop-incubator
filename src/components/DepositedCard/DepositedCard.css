@@ -80,3 +80,47 @@
     margin: 1rem 2rem;
   }
 }
+
+body .toast {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  width: 30rem;
+}
+
+@media only screen and (min-width: 600px) {
+  body .toast {
+    bottom: unset;
+    top: 6rem;
+    right: 3rem;
+    width: 35rem;
+  }
+}
+
+body .toast-body {
+  background-color: transparent;
+  font-size: 1.55rem;
+  padding: 1rem 1.5rem;
+  word-wrap: break-word;
+  z-index: 99999999999;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+body .toast-body svg {
+  stroke-width: 2 !important;
+  color: white;
+  margin-right: 1rem;
+  width: 3rem;
+}
+
+body .toast-info {
+  background-color: #ff9800;
+  font-weight: 300;
+}
+
+body .toast-error {
+  background-color: #f44435;
+  font-weight: 300;
+}
