@@ -57,17 +57,9 @@ class ActivePools extends Component {
     BUSD_totalLPLocked = Web3.utils.fromWei(BUSD_totalLPLocked);
     this.setState({ BUSD_tvl: BUSD_totalLPLocked * window.BUSD_lptValue });
 
-    const BUSD_annualRoi_computation =
-      ((60000000 * window.kpopUsdPrice) / this.state.BUSD_tvl) * 100;
-
-    const BUSD_annualRoi_value =
-      BUSD_annualRoi_computation === "Infinity"
-        ? BUSD_annualRoi_computation
-        : 0;
-
     // calculate yearly apy (yearly kpop distributed value / total locked value)
     this.setState({
-      BUSD_annualRoi: BUSD_annualRoi_value,
+      BUSD_annualRoi: ((60000000 * window.kpopUsdPrice) / this.state.BUSD_tvl) * 100
     });
     // set daily rewards per thousend $
     this.setState({
