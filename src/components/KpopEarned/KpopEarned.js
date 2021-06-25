@@ -8,8 +8,7 @@ class KpopEarned extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      BNB_kpopEarned: 0,
-      BUSD_kpopEarned: 0,
+      totalEarned: 0,
       isLoading: false,
     };
     this.claim = this.claim.bind(this);
@@ -34,10 +33,10 @@ class KpopEarned extends Component {
     );
     let BUSD_e = await BUSD_myContract.methods.earned(window.account).call();
     let BUSD_earned = Web3.utils.fromWei(BUSD_e);
+
     this.setState({
       isLoading: false,
-      BNB_kpopEarned: Number(BNB_earned),
-      BUSD_kpopEarned: Number(BUSD_earned),
+      totalEarned: Number(BUSD_earned) + Number(BNB_earned),
     });
   }
 
@@ -76,7 +75,7 @@ class KpopEarned extends Component {
           <p className="mb-4 kpop-earned-label">BSC</p>
         </div>
         <EarnedCard
-          kpopEarned={this.state.BNB_kpopEarned + this.state.BUSD_kpopEarned}
+          kpopEarned={this.state.totalEarned}
           handleClaim={this.claim}
         />
       </>
