@@ -478,7 +478,7 @@ window.KPOP_BNB_SMART_CONTRACT = "0x83ca76bdc2e454e362826c25b8f4abd0791bb594";
 window.KPOP_FAN_TOKEN_ADDRESS = "0x3Ba2b1C2c46200e826C56550ff7a2b29bad10F3d";
 window.BND_BUSD_LP_ADDRESS = "0x1B96B92314C44b159149f7E0303511fB2Fc4774f";
 
-window.KPOP_BUSD_FARMING_ADDRESS = "0x027c4B2b8516Ea7BD44EEA6bcfbEc405630C67cc";
+window.KPOP_BUSD_FARMING_ADDRESS = "0x9a74B9e221D6D13C1ffe341c797072514E8f617c";
 window.KPOP_BUSD_SMART_CONTRACT = "0x9484201A78FBE9B75A145044d4a1b50d2d7A360F";
 
 class App extends Component {
@@ -580,15 +580,15 @@ class App extends Component {
     let BUSD_poolBalance = await busd.methods
       .balanceOf(window.KPOP_BUSD_SMART_CONTRACT)
       .call();
-    
+
     // Calculate Lp token value:
     let BUSD_lpToken = new web3.eth.Contract(
       window.erc20_abi,
       window.KPOP_BUSD_SMART_CONTRACT
     );
     let BUSD_totalLPtSupply = await BUSD_lpToken.methods.totalSupply().call();
-    
-    window.BUSD_lptValue = (BUSD_poolBalance * 2) / BUSD_totalLPtSupply ;
+
+    window.BUSD_lptValue = (BUSD_poolBalance * 2) / BUSD_totalLPtSupply;
 
     // Get lp token balance:
     let BUSD_myBalance = await BUSD_lpToken.methods

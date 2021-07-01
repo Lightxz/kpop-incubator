@@ -9,11 +9,14 @@ const ActivePool = (props) => {
     mainImage,
     secondaryImage,
     isComingSoon,
-    emissionPerDay,
-    annualRoi,
-    tvl,
+    emissionPerDay = 0,
+    annualRoi = 0,
+    tvl = 0,
     learnMoreLink,
   } = props;
+
+  const emissionValue = emissionPerDay === Infinity ? 0 : emissionPerDay;
+  const annualRoiValue = annualRoi === Infinity ? 0 : annualRoi;
 
   return (
     <div className="active-pool-component">
@@ -46,7 +49,7 @@ const ActivePool = (props) => {
               <div className="d-flex text-container m-0">
                 <p className="header m-0">
                   <NumberFormat
-                    value={emissionPerDay}
+                    value={emissionValue}
                     decimalScale={4}
                     displayType={"text"}
                     thousandSeparator={true}
@@ -60,7 +63,7 @@ const ActivePool = (props) => {
                 <p className="m-0">
                   <strong className="roi-rate">
                     <NumberFormat
-                      value={annualRoi / 365}
+                      value={annualRoiValue / 365}
                       decimalScale={2}
                       displayType={"text"}
                       thousandSeparator={true}
@@ -72,7 +75,7 @@ const ActivePool = (props) => {
                 <p className="m-0">
                   <strong className="roi-rate">
                     <NumberFormat
-                      value={annualRoi / 52}
+                      value={annualRoiValue / 52}
                       decimalScale={2}
                       displayType={"text"}
                       thousandSeparator={true}
@@ -84,7 +87,7 @@ const ActivePool = (props) => {
                 <p className="m-0">
                   <strong className="roi-rate">
                     <NumberFormat
-                      value={annualRoi}
+                      value={annualRoiValue}
                       decimalScale={2}
                       displayType={"text"}
                       thousandSeparator={true}
@@ -151,7 +154,7 @@ const ActivePool = (props) => {
               <h2 className="pool-title-header">Emission per Day</h2>
               <p className="header m-0">
                 <NumberFormat
-                  value={emissionPerDay}
+                  value={emissionValue}
                   decimalScale={4}
                   displayType={"text"}
                   thousandSeparator={true}
@@ -168,7 +171,7 @@ const ActivePool = (props) => {
               <p className="m-0">
                 <strong className="roi-rate">
                   <NumberFormat
-                    value={annualRoi / 365}
+                    value={annualRoiValue / 365}
                     decimalScale={2}
                     displayType={"text"}
                     thousandSeparator={true}
@@ -180,7 +183,7 @@ const ActivePool = (props) => {
               <p className="m-0">
                 <strong className="roi-rate">
                   <NumberFormat
-                    value={annualRoi / 52}
+                    value={annualRoiValue / 52}
                     decimalScale={2}
                     displayType={"text"}
                     thousandSeparator={true}
@@ -192,7 +195,7 @@ const ActivePool = (props) => {
               <p className="m-0">
                 <strong className="roi-rate">
                   <NumberFormat
-                    value={annualRoi}
+                    value={annualRoiValue}
                     decimalScale={2}
                     displayType={"text"}
                     thousandSeparator={true}
