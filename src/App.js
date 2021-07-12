@@ -662,7 +662,10 @@ export default App;
 class ConnectYourWallet extends Component {
   render() {
     return (
-      <div className="connectMessageContainer">Please Connect Your Wallet</div>
+      <div className="connectMessageContainer">
+        Please connect your wallet to join active{" "}
+        <strong className="textEmphasize">KPOP Pools</strong>
+      </div>
     );
   }
 }
