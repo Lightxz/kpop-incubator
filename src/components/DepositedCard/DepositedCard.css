@@ -2,13 +2,20 @@
   border: 1px solid #878c92;
   background-color: transparent;
   border-radius: 5px;
-  padding: 4rem;
-  margin: 1rem;
+  padding: 3rem;
+  margin: 1.25rem auto;
+  min-width: 40rem;
+  max-width: 45rem;
+  width: 100%;
 }
 
 .fw-200 p,
 .fw-200 small {
   font-weight: 200;
+}
+
+.deposited-container {
+  flex-direction: column;
 }
 
 .deposited-btn {
@@ -28,6 +35,7 @@
   flex: 1;
   justify-content: center;
   align-items: center;
+  padding: 2rem 0;
 }
 
 .deposited-information {
@@ -40,7 +48,7 @@
 .deposited-text-container {
   min-width: 20rem;
   width: 100%;
-  margin: 1rem 2rem;
+  margin: 2rem;
   flex-direction: column;
 }
 .deposited-text-container .header {
@@ -52,9 +60,15 @@
   font-size: 1.5rem;
 }
 
+@media only screen and (max-width: 500px) {
+  .card-item {
+    min-width: unset;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .deposited-text-container {
-    margin: 1rem !important;
+    margin: 2rem !important;
     margin-left: 2rem !important;
   }
 
@@ -69,9 +83,6 @@
 }
 
 @media only screen and (max-width: 900px) {
-  .deposited-container {
-    flex-direction: column;
-  }
   .deposited-btn-container {
     margin-top: 2rem;
   }

@@ -127,6 +127,7 @@ window.erc20_abi = [
 ];
 const wbnb_address = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
 const busd_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56";
+const CAKE_address = "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82";
 
 window.farming_abi = [
   {
@@ -481,6 +482,10 @@ window.BND_BUSD_LP_ADDRESS = "0x1B96B92314C44b159149f7E0303511fB2Fc4774f";
 window.KPOP_BUSD_FARMING_ADDRESS = "0x9a74B9e221D6D13C1ffe341c797072514E8f617c";
 window.KPOP_BUSD_SMART_CONTRACT = "0x9484201A78FBE9B75A145044d4a1b50d2d7A360F";
 
+// window.KPOP_CAKE_FARMING_ADDRESS = "0x47E03D4D62132A7E772Fe9cAbE41dF825550821a";
+window.KPOP_CAKE_FARMING_ADDRESS = "0xD9f5D110E4D3FA417b2EA8733c2fBC50B7166Cc8";
+window.KPOP_CAKE_SMART_CONTRACT = "0xb866B850c2e7Aac728267db76bF87F8cE382b382";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -499,17 +504,21 @@ class App extends Component {
         // Request account access
         await window.ethereum.enable();
       } catch (error) {
-        // User denied account access...
-        alert("You must connect your wallet !");
         this.setState({ isLoading: false });
+        // User denied account access...
+        alert(
+          "You have to use Trustwallet app or install Metamask extension in your browser to use this app, you can install it from :  https://metamask.io/download.html"
+        );
+
         return;
       }
     } else {
+      this.setState({ isLoading: false });
       // you cant connect
       alert(
         "You have to use Trustwallet app or install Metamask extension in your browser to use this app, you can install it from :  https://metamask.io/download.html"
       );
-      this.setState({ isLoading: false });
+
       return;
     }
     let web3 = new Web3(window.ethereum);
@@ -517,8 +526,8 @@ class App extends Component {
     // Check network id
     let chainId = await web3.eth.net.getId();
     if (chainId !== 56) {
-      alert("Please switch your wallet to BSC");
       this.setState({ isLoading: false });
+      alert("Please switch your wallet to BSC");
       return;
     }
 
@@ -604,6 +613,39 @@ class App extends Component {
     let BUSD_d = await BUSD_myContract.methods.balanceOf(window.account).call();
     let BUSD_deposited = Web3.utils.fromWei(BUSD_d);
     window.BUSD_depositedLp = BUSD_deposited;
+
+    // --------- KPOP/CAKE -----------
+    let cake = new web3.eth.Contract(window.erc20_abi, CAKE_address);
+
+    let CAKE_poolBalance = await cake.methods
+      .balanceOf(window.KPOP_CAKE_SMART_CONTRACT)
+      .call();
+
+    // Calculate Lp token value:
+    let CAKE_lpToken = new web3.eth.Contract(
+      window.erc20_abi,
+      window.KPOP_CAKE_SMART_CONTRACT
+    );
+    let CAKE_totalLPtSupply = await CAKE_lpToken.methods.totalSupply().call();
+
+    console.log(CAKE_poolBalance);
+    window.CAKE_lptValue = (CAKE_poolBalance * 2) / CAKE_totalLPtSupply;
+
+    // Get lp token balance:
+    let CAKE_myBalance = await CAKE_lpToken.methods
+      .balanceOf(window.account)
+      .call();
+    window.CAKE_lpBalance = Web3.utils.fromWei(CAKE_myBalance);
+
+    // Get deposited lp tokens:
+    let CAKE_myContract = new web3.eth.Contract(
+      window.farming_abi,
+      window.KPOP_CAKE_FARMING_ADDRESS
+    );
+    let CAKE_d = await CAKE_myContract.methods.balanceOf(window.account).call();
+    let CAKE_deposited = Web3.utils.fromWei(CAKE_d);
+    window.CAKE_depositedLp = CAKE_deposited;
+
     // -------------------------------
 
     this.setState({ walletConnected: true, isLoading: false });

@@ -126,7 +126,9 @@ const DepositedCard = (props) => {
           <div className="deposited-information">
             <div className="logo-container">
               <img src={mainImage} alt={title} className="mainLogo" />
-              <img src={secondaryImage} className="subLogo" alt={title} />
+              {secondaryImage && (
+                <img src={secondaryImage} className="subLogo" alt={title} />
+              )}
             </div>
             <div>
               <div className="deposited-text-container">

@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import mainLogo from "../../images/kpop-logo.png";
 import bnbLogo from "../../images/BNB-logo.png";
 import busdLogo from "../../images/busd-logo.png";
+import cakeLogo from "../../images/cake-logo.png";
 import ActivePool from "../ActivePool/ActivePool";
 
 class ActivePools extends Component {
@@ -59,12 +60,38 @@ class ActivePools extends Component {
 
     // calculate yearly apy (yearly kpop distributed value / total locked value)
     this.setState({
-      BUSD_annualRoi: ((60000000 * window.kpopUsdPrice) / this.state.BUSD_tvl) * 100
+      BUSD_annualRoi:
+        ((60000000 * window.kpopUsdPrice) / this.state.BUSD_tvl) * 100,
     });
     // set daily rewards per thousend $
     this.setState({
       BUSD_dailyPerThousand:
         ((this.state.BUSD_annualRoi / 100) * 1000) / window.kpopUsdPrice,
+    });
+
+    // KPOP/CAKE
+    // calculate tvl
+    let CAKE_lpToken = new web3.eth.Contract(
+      window.erc20_abi,
+      window.KPOP_CAKE_SMART_CONTRACT
+    );
+
+    let CAKE_totalLPLocked = await CAKE_lpToken.methods
+      .balanceOf(window.KPOP_CAKE_FARMING_ADDRESS)
+      .call();
+
+    CAKE_totalLPLocked = Web3.utils.fromWei(CAKE_totalLPLocked);
+    this.setState({ CAKE_tvl: CAKE_totalLPLocked * window.CAKE_lptValue });
+
+    // calculate yearly apy (yearly kpop distributed value / total locked value)
+    this.setState({
+      CAKE_annualRoi:
+        ((60000000 * window.kpopUsdPrice) / this.state.CAKE_tvl) * 100,
+    });
+    // set daily rewards per thousend $
+    this.setState({
+      CAKE_dailyPerThousand:
+        ((this.state.CAKE_annualRoi / 100) * 1000) / window.kpopUsdPrice,
     });
   }
 
@@ -96,6 +123,14 @@ class ActivePools extends Component {
           </div>
 
           <ActivePool
+            title="KPOP"
+            mainImage={mainLogo}
+            emissionPerDay={this.state.dailyPerThousand}
+            annualRoi={this.state.annualRoi}
+            tvl={this.state.tvl}
+          />
+
+          <ActivePool
             title="KPOP/BNB"
             mainImage={mainLogo}
             secondaryImage={bnbLogo}
@@ -113,6 +148,16 @@ class ActivePools extends Component {
             emissionPerDay={this.state.BUSD_dailyPerThousand}
             annualRoi={this.state.BUSD_annualRoi}
             tvl={this.state.BUSD_tvl}
+            // learnMoreLink="https://kpopfantoken.medium.com/liquidity-mining-with-kpop-fan-token-d847ff6ba64f?postPublishedType=initial"
+          />
+
+          <ActivePool
+            title="KPOP/CAKE"
+            mainImage={mainLogo}
+            secondaryImage={cakeLogo}
+            emissionPerDay={this.state.CAKE_dailyPerThousand}
+            annualRoi={this.state.CAKE_annualRoi}
+            tvl={this.state.CAKE_tvl}
             // learnMoreLink="https://kpopfantoken.medium.com/liquidity-mining-with-kpop-fan-token-d847ff6ba64f?postPublishedType=initial"
           />
         </Container>

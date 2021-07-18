@@ -33,11 +33,13 @@ const ActivePool = (props) => {
             <Col className="pool-container d-flex" xs={4}>
               <div className="logo-container">
                 <img src={mainImage} alt={title} className="mainLogo" />
-                <img
-                  src={secondaryImage}
-                  className="subLogo"
-                  alt="secondaryImage"
-                />
+                {secondaryImage && (
+                  <img
+                    src={secondaryImage}
+                    className="subLogo"
+                    alt="secondaryImage"
+                  />
+                )}
               </div>
 
               <div className="d-flex text-container">
@@ -138,7 +140,9 @@ const ActivePool = (props) => {
             <div className="pool-container d-flex">
               <div className="logo-container">
                 <img src={mainImage} alt={title} className="mainLogo" />
-                <img src={secondaryImage} className="subLogo" alt={title} />
+                {secondaryImage && (
+                  <img src={secondaryImage} className="subLogo" alt={title} />
+                )}
               </div>
 
               <div className="d-flex text-container">
