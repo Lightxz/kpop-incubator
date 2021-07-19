@@ -478,6 +478,7 @@ window.KPOP_BNB_FARMING_ADDRESS = "0xF9C6b9a271fbf2997D03490437614E5253c65BF6";
 window.KPOP_BNB_SMART_CONTRACT = "0x83ca76bdc2e454e362826c25b8f4abd0791bb594";
 window.KPOP_FAN_TOKEN_ADDRESS = "0x3Ba2b1C2c46200e826C56550ff7a2b29bad10F3d";
 window.BND_BUSD_LP_ADDRESS = "0x1B96B92314C44b159149f7E0303511fB2Fc4774f";
+window.CAKE_BUSD_LP_ADDRESS = "0x804678fa97d91b974ec2af3c843270886528a9e6";
 
 window.KPOP_BUSD_FARMING_ADDRESS = "0x9a74B9e221D6D13C1ffe341c797072514E8f617c";
 window.KPOP_BUSD_SMART_CONTRACT = "0x9484201A78FBE9B75A145044d4a1b50d2d7A360F";
@@ -617,6 +618,16 @@ class App extends Component {
     // --------- KPOP/CAKE -----------
     let cake = new web3.eth.Contract(window.erc20_abi, CAKE_address);
 
+    // get cake price:
+    let cakeBalance = await cake.methods
+      .balanceOf(window.CAKE_BUSD_LP_ADDRESS)
+      .call();
+    busdBalance = await busd.methods
+      .balanceOf(window.CAKE_BUSD_LP_ADDRESS)
+      .call();
+
+    let cakePrice = busdBalance / cakeBalance;
+
     let CAKE_poolBalance = await cake.methods
       .balanceOf(window.KPOP_CAKE_SMART_CONTRACT)
       .call();
@@ -628,8 +639,7 @@ class App extends Component {
     );
     let CAKE_totalLPtSupply = await CAKE_lpToken.methods.totalSupply().call();
 
-    console.log(CAKE_poolBalance);
-    window.CAKE_lptValue = (CAKE_poolBalance * 2) / CAKE_totalLPtSupply;
+    window.CAKE_lptValue = ((CAKE_poolBalance * 2) / CAKE_totalLPtSupply) * cakePrice;
 
     // Get lp token balance:
     let CAKE_myBalance = await CAKE_lpToken.methods
