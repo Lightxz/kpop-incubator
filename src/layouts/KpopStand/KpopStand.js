@@ -59,7 +59,7 @@ function KpopStand(props) {
                   <div className="accordion-body ">
                     <Row>
                       <DepositedCard
-                        title="KPOP LP"
+                        title="KPOP Tokens"
                         mainImage={mainImage}
                         availableBalance={window.KPOP_lpBalance}
                         withdrawableBalance={window.KPOP_depositedLp}
