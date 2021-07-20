@@ -128,6 +128,7 @@ window.erc20_abi = [
 const wbnb_address = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
 const busd_address = "0xe9e7cea3dedca5984780bafc599bd69add087d56";
 const CAKE_address = "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82";
+const KPOP_address = "0x3Ba2b1C2c46200e826C56550ff7a2b29bad10F3d";
 
 window.farming_abi = [
   {
@@ -483,9 +484,11 @@ window.CAKE_BUSD_LP_ADDRESS = "0x804678fa97d91b974ec2af3c843270886528a9e6";
 window.KPOP_BUSD_FARMING_ADDRESS = "0x9a74B9e221D6D13C1ffe341c797072514E8f617c";
 window.KPOP_BUSD_SMART_CONTRACT = "0x9484201A78FBE9B75A145044d4a1b50d2d7A360F";
 
-// window.KPOP_CAKE_FARMING_ADDRESS = "0x47E03D4D62132A7E772Fe9cAbE41dF825550821a";
-window.KPOP_CAKE_FARMING_ADDRESS = "0xD9f5D110E4D3FA417b2EA8733c2fBC50B7166Cc8";
+window.KPOP_CAKE_FARMING_ADDRESS = "0x47E03D4D62132A7E772Fe9cAbE41dF825550821a";
 window.KPOP_CAKE_SMART_CONTRACT = "0xb866B850c2e7Aac728267db76bF87F8cE382b382";
+
+window.KPOP_FARMING_ADDRESS = "0x415685EB61F480C017b9EA9499a8fd104CB679f5";
+window.KPOP_SMART_CONTRACT = "0x3Ba2b1C2c46200e826C56550ff7a2b29bad10F3d";
 
 class App extends Component {
   constructor(props) {
@@ -639,7 +642,8 @@ class App extends Component {
     );
     let CAKE_totalLPtSupply = await CAKE_lpToken.methods.totalSupply().call();
 
-    window.CAKE_lptValue = ((CAKE_poolBalance * 2) / CAKE_totalLPtSupply) * cakePrice;
+    window.CAKE_lptValue =
+      ((CAKE_poolBalance * 2) / CAKE_totalLPtSupply) * cakePrice;
 
     // Get lp token balance:
     let CAKE_myBalance = await CAKE_lpToken.methods
@@ -656,7 +660,37 @@ class App extends Component {
     let CAKE_deposited = Web3.utils.fromWei(CAKE_d);
     window.CAKE_depositedLp = CAKE_deposited;
 
-    // -------------------------------
+    // --------- KPOP SINGLE STAKING -----------
+    let KPOP = new web3.eth.Contract(window.erc20_abi, KPOP_address);
+
+    let KPOP_poolBalance = await KPOP.methods
+      .balanceOf(window.KPOP_SMART_CONTRACT)
+      .call();
+
+    // Calculate Lp token value:
+    let KPOP_lpToken = new web3.eth.Contract(
+      window.erc20_abi,
+      window.KPOP_SMART_CONTRACT
+    );
+    let KPOP_totalLPtSupply = await KPOP_lpToken.methods.totalSupply().call();
+
+    window.KPOP_lptValue =
+      ((KPOP_poolBalance * 2) / KPOP_totalLPtSupply) * window.kpopUsdPrice;
+
+    // Get lp token balance:
+    let KPOP_myBalance = await KPOP_lpToken.methods
+      .balanceOf(window.account)
+      .call();
+    window.KPOP_lpBalance = Web3.utils.fromWei(KPOP_myBalance);
+
+    // Get deposited lp tokens:
+    let KPOP_myContract = new web3.eth.Contract(
+      window.farming_abi,
+      window.KPOP_FARMING_ADDRESS
+    );
+    let KPOP_d = await KPOP_myContract.methods.balanceOf(window.account).call();
+    let KPOP_deposited = Web3.utils.fromWei(KPOP_d);
+    window.KPOP_depositedLp = KPOP_deposited;
 
     this.setState({ walletConnected: true, isLoading: false });
   }
@@ -698,7 +732,7 @@ class App extends Component {
           <ConnectYourWallet />
         ) : (
           <div>
-            <KpopStand handleOpenModal={this.handleOpenModal} />
+            <KpopStand />
             <ActivePools />
           </div>
         )}

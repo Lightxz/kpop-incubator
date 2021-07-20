@@ -11,7 +11,6 @@ import busdLogo from "../../images/busd-logo.png";
 import cakeLogo from "../../images/cake-logo.png";
 
 function KpopStand(props) {
-  const { handleOpenModal } = props;
   const kpopUsdPrice = window.kpopUsdPrice
     ? Number(window.kpopUsdPrice)?.toFixed(4)
     : 0;
@@ -62,19 +61,17 @@ function KpopStand(props) {
                       <DepositedCard
                         title="KPOP LP"
                         mainImage={mainImage}
-                        handleOpenModal={handleOpenModal}
-                        availableBalance={window.lpBalance}
-                        withdrawableBalance={window.depositedLp}
-                        smart_contract={window.KPOP_BNB_SMART_CONTRACT}
-                        farming_address={window.KPOP_BNB_FARMING_ADDRESS}
-                        lptValue={window.lptValue}
+                        availableBalance={window.KPOP_lpBalance}
+                        withdrawableBalance={window.KPOP_depositedLp}
+                        smart_contract={window.KPOP_SMART_CONTRACT}
+                        farming_address={window.KPOP_FARMING_ADDRESS}
+                        lptValue={window.KPOP_lptValue}
                       />
 
                       <DepositedCard
                         title="KPOP/BNB LP"
                         mainImage={mainImage}
                         secondaryImage={bnbLogo}
-                        handleOpenModal={handleOpenModal}
                         availableBalance={window.lpBalance}
                         withdrawableBalance={window.depositedLp}
                         smart_contract={window.KPOP_BNB_SMART_CONTRACT}
@@ -87,7 +84,6 @@ function KpopStand(props) {
                         title="KPOP/BUSD LP"
                         mainImage={mainImage}
                         secondaryImage={busdLogo}
-                        handleOpenModal={handleOpenModal}
                         availableBalance={window.BUSD_lpBalance}
                         withdrawableBalance={window.BUSD_depositedLp}
                         smart_contract={window.KPOP_BUSD_SMART_CONTRACT}
@@ -99,7 +95,6 @@ function KpopStand(props) {
                         title="KPOP/CAKE LP"
                         mainImage={mainImage}
                         secondaryImage={cakeLogo}
-                        handleOpenModal={handleOpenModal}
                         availableBalance={window.CAKE_lpBalance}
                         withdrawableBalance={window.CAKE_depositedLp}
                         smart_contract={window.KPOP_CAKE_SMART_CONTRACT}

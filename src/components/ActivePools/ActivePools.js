@@ -93,6 +93,31 @@ class ActivePools extends Component {
       CAKE_dailyPerThousand:
         ((this.state.CAKE_annualRoi / 100) * 1000) / window.kpopUsdPrice,
     });
+
+    // KPOP
+    // calculate tvl
+    let KPOP_lpToken = new web3.eth.Contract(
+      window.erc20_abi,
+      window.KPOP_SMART_CONTRACT
+    );
+
+    let KPOP_totalLPLocked = await KPOP_lpToken.methods
+      .balanceOf(window.KPOP_FARMING_ADDRESS)
+      .call();
+
+    KPOP_totalLPLocked = Web3.utils.fromWei(KPOP_totalLPLocked);
+    this.setState({ KPOP_tvl: KPOP_totalLPLocked * window.KPOP_lptValue });
+
+    // calculate yearly apy (yearly kpop distributed value / total locked value)
+    this.setState({
+      KPOP_annualRoi:
+        ((60000000 * window.kpopUsdPrice) / this.state.KPOP_tvl) * 100,
+    });
+    // set daily rewards per thousend $
+    this.setState({
+      KPOP_dailyPerThousand:
+        ((this.state.KPOP_annualRoi / 100) * 1000) / window.kpopUsdPrice,
+    });
   }
 
   render() {
@@ -125,9 +150,9 @@ class ActivePools extends Component {
           <ActivePool
             title="KPOP"
             mainImage={mainLogo}
-            emissionPerDay={this.state.dailyPerThousand}
-            annualRoi={this.state.annualRoi}
-            tvl={this.state.tvl}
+            emissionPerDay={this.state.KPOP_dailyPerThousand}
+            annualRoi={this.state.KPOP_annualRoi}
+            tvl={this.state.KPOP_tvl}
           />
 
           <ActivePool

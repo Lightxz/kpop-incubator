@@ -22,6 +22,7 @@ const DepositedCard = (props) => {
     secondaryImage,
     title,
     lptValue,
+    isButtonDisabled,
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -158,12 +159,14 @@ const DepositedCard = (props) => {
             <Button
               className="deposited-btn"
               onClick={() => handleOpenModal(MODAL_TYPE.STAKE)}
+              disabled={isButtonDisabled}
             >
               Stake
             </Button>
             <Button
               className="deposited-btn"
               onClick={() => handleOpenModal(MODAL_TYPE.UNSTAKE)}
+              disabled={isButtonDisabled}
             >
               Unstake
             </Button>
