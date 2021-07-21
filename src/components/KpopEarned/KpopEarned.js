@@ -42,10 +42,18 @@ class KpopEarned extends Component {
     let CAKE_e = await CAKE_myContract.methods.earned(window.account).call();
     let CAKE_earned = Web3.utils.fromWei(CAKE_e);
 
+    // KPOP POOL
+    let KPOP_myContract = new _web3.eth.Contract(
+      window.farming_abi,
+      window.KPOP_FARMING_ADDRESS
+    );
+    let KPOP_e = await KPOP_myContract.methods.earned(window.account).call();
+    let KPOP_earned = Web3.utils.fromWei(KPOP_e);
+
     this.setState({
       isLoading: false,
       totalEarned:
-        Number(BUSD_earned) + Number(BNB_earned) + Number(CAKE_earned),
+        Number(BUSD_earned) + Number(BNB_earned) + Number(CAKE_earned) + Number(KPOP_earned),
     });
   }
 
@@ -79,6 +87,16 @@ class KpopEarned extends Component {
     );
 
     await CAKE_myContract.methods.getReward().send({
+      from: window.account,
+    });
+
+    // KPOP POOL
+    let KPOP_myContract = new _web3.eth.Contract(
+      window.farming_abi,
+      window.KPOP_FARMING_ADDRESS
+    );
+
+    await KPOP_myContract.methods.getReward().send({
       from: window.account,
     });
 

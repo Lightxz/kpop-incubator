@@ -65,7 +65,7 @@ function KpopStand(props) {
                         withdrawableBalance={window.KPOP_depositedLp}
                         smart_contract={window.KPOP_SMART_CONTRACT}
                         farming_address={window.KPOP_FARMING_ADDRESS}
-                        lptValue={window.KPOP_lptValue}
+                        lptValue={window.kpopUsdPrice}
                       />
 
                       <DepositedCard
