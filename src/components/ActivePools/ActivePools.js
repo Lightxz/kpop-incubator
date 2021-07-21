@@ -106,7 +106,7 @@ class ActivePools extends Component {
       .call();
 
     KPOP_totalLPLocked = Web3.utils.fromWei(KPOP_totalLPLocked);
-    this.setState({ KPOP_tvl: KPOP_totalLPLocked * window.KPOP_lptValue });
+    this.setState({ KPOP_tvl: KPOP_totalLPLocked * window.kpopUsdPrice });
 
     // calculate yearly apy (yearly kpop distributed value / total locked value)
     this.setState({
