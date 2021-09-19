@@ -167,7 +167,7 @@ class ActivePools extends Component {
 
           <ActivePool
             isComingSoon={false}
-            title="KPOP/BUSD"
+            title="KFan/BUSD"
             mainImage={mainLogo}
             secondaryImage={busdLogo}
             emissionPerDay={this.state.BUSD_dailyPerThousand}
