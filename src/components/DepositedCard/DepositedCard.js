@@ -122,7 +122,7 @@ const DepositedCard = (props) => {
       )}
 
       <div className={`card-item ${isComingSoon && "blurred-bg"}`}>
-        <p>LP Deposited</p>
+        {title === "KFan Tokens" ? <p>KFAN Deposited</p> : <p>LP Deposited</p>}
         <div className="d-flex deposited-container">
           <div className="deposited-information">
             <div className="logo-container">

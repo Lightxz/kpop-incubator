@@ -19,7 +19,7 @@ function KpopStand(props) {
       <section className="kpop-stand">
         <Container>
           <div className="kpop-stand-header-container">
-            <p className="kpop-stand-text">KPOP Incubator</p>
+            <p className="kpop-stand-text">KFAN Incubator</p>
             <div className="price-container">
               <img src={KPOPLogo} alt="KPOP" className="value-logo" />
               <a

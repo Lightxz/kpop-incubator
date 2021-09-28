@@ -19,7 +19,7 @@ const EarnedCard = (props) => {
                 decimalScale={4}
                 displayType={"text"}
                 thousandSeparator={true}
-                suffix={" KPOP"}
+                suffix={" KFAN"}
               />
             </p>
             <small className="kpop-usd-earned">

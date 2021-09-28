@@ -14,7 +14,7 @@ function Landing(props) {
               <img src={lightStick1} alt="light stick 1" />
             </div>
             <div className="title-content">
-              <h1>Welcome to KPOP Incubator</h1>
+              <h1>Welcome to KFAN Incubator</h1>
               <h2>Start your idol journey now!</h2>
             </div>
             <div className="light-stick">

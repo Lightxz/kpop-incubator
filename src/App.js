@@ -491,7 +491,7 @@ window.KPOP_CAKE_SMART_CONTRACT = "0xb866B850c2e7Aac728267db76bF87F8cE382b382";
 window.KPOP_FARMING_ADDRESS = "0x415685EB61F480C017b9EA9499a8fd104CB679f5";
 window.KPOP_SMART_CONTRACT = "0x3Ba2b1C2c46200e826C56550ff7a2b29bad10F3d";
 
-window.KFAN_FARMING_ADDRESS = "0xE97135D7a4bCA8fEAaE572A4241082F6196C05A0";
+window.KFAN_FARMING_ADDRESS = "0xc9C011a21bf93F4f09E5D5f636c70473f30ecE0B";
 window.KFAN_SMART_CONTRACT = "0x8efef94ea1b04aa02814f0f5c7a7389dabdb6d6a";
 
 class App extends Component {
@@ -745,7 +745,7 @@ class ConnectYourWallet extends Component {
     return (
       <div className="connectMessageContainer">
         Please connect your wallet to join active{" "}
-        <strong className="textEmphasize">KPOP Pools</strong>
+        <strong className="textEmphasize">KFAN Pools</strong>
       </div>
     );
   }
