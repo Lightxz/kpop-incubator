@@ -118,6 +118,32 @@ class ActivePools extends Component {
       KPOP_dailyPerThousand:
         ((this.state.KPOP_annualRoi / 100) * 1000) / window.kpopUsdPrice,
     });
+
+    // KFAN
+    // calculate tvl
+    let KFAN_lpToken = new web3.eth.Contract(
+      window.erc20_abi,
+      window.KFAN_SMART_CONTRACT
+    );
+
+    let KFAN_totalLPLocked = await KFAN_lpToken.methods
+      .balanceOf(window.KFAN_FARMING_ADDRESS)
+      .call();
+
+    KFAN_totalLPLocked = Web3.utils.fromWei(KFAN_totalLPLocked);
+    this.setState({ KFAN_tvl: KFAN_totalLPLocked * window.kfanUsdPrice });
+
+    // calculate yearly apy (yearly kpop distributed value / total locked value)
+    this.setState({
+      KFAN_annualRoi:
+        ((60000000 * window.kfanUsdPrice) / this.state.KFAN_tvl) * 100,
+    });
+    // set daily rewards per thousend $
+
+    this.setState({
+      KFAN_dailyPerThousand:
+        ((this.state.KFAN_annualRoi / 100) * 1000) / window.kfanUsdPrice,
+    });
   }
 
   render() {
@@ -153,6 +179,13 @@ class ActivePools extends Component {
             emissionPerDay={this.state.KPOP_dailyPerThousand}
             annualRoi={this.state.KPOP_annualRoi}
             tvl={this.state.KPOP_tvl}
+          />
+          <ActivePool
+            title="KFan"
+            mainImage={mainLogo}
+            emissionPerDay={this.state.KFAN_dailyPerThousand}
+            annualRoi={this.state.KFAN_annualRoi}
+            tvl={this.state.KFAN_tvl}
           />
 
           <ActivePool
