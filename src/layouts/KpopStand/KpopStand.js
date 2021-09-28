@@ -8,7 +8,6 @@ import { Container, Row } from "react-bootstrap";
 import mainImage from "../../images/kpop-logo.png";
 import bnbLogo from "../../images/BNB-logo.png";
 import busdLogo from "../../images/busd-logo.png";
-import cakeLogo from "../../images/cake-logo.png";
 
 function KpopStand(props) {
   const kpopUsdPrice = window.kpopUsdPrice
@@ -99,17 +98,6 @@ function KpopStand(props) {
                         smart_contract={window.KPOP_BUSD_SMART_CONTRACT}
                         farming_address={window.KPOP_BUSD_FARMING_ADDRESS}
                         lptValue={window.BUSD_lptValue}
-                      />
-
-                      <DepositedCard
-                        title="KPOP/CAKE LP"
-                        mainImage={mainImage}
-                        secondaryImage={cakeLogo}
-                        availableBalance={window.CAKE_lpBalance}
-                        withdrawableBalance={window.CAKE_depositedLp}
-                        smart_contract={window.KPOP_CAKE_SMART_CONTRACT}
-                        farming_address={window.KPOP_CAKE_FARMING_ADDRESS}
-                        lptValue={window.CAKE_lptValue}
                       />
                     </Row>
                   </div>

@@ -622,48 +622,6 @@ class App extends Component {
     let BUSD_deposited = Web3.utils.fromWei(BUSD_d);
     window.BUSD_depositedLp = BUSD_deposited;
 
-    // --------- KPOP/CAKE -----------
-    let cake = new web3.eth.Contract(window.erc20_abi, CAKE_address);
-
-    // get cake price:
-    let cakeBalance = await cake.methods
-      .balanceOf(window.CAKE_BUSD_LP_ADDRESS)
-      .call();
-    busdBalance = await busd.methods
-      .balanceOf(window.CAKE_BUSD_LP_ADDRESS)
-      .call();
-
-    let cakePrice = busdBalance / cakeBalance;
-
-    let CAKE_poolBalance = await cake.methods
-      .balanceOf(window.KPOP_CAKE_SMART_CONTRACT)
-      .call();
-
-    // Calculate Lp token value:
-    let CAKE_lpToken = new web3.eth.Contract(
-      window.erc20_abi,
-      window.KPOP_CAKE_SMART_CONTRACT
-    );
-    let CAKE_totalLPtSupply = await CAKE_lpToken.methods.totalSupply().call();
-
-    window.CAKE_lptValue =
-      ((CAKE_poolBalance * 2) / CAKE_totalLPtSupply) * cakePrice;
-
-    // Get lp token balance:
-    let CAKE_myBalance = await CAKE_lpToken.methods
-      .balanceOf(window.account)
-      .call();
-    window.CAKE_lpBalance = Web3.utils.fromWei(CAKE_myBalance);
-
-    // Get deposited lp tokens:
-    let CAKE_myContract = new web3.eth.Contract(
-      window.farming_abi,
-      window.KPOP_CAKE_FARMING_ADDRESS
-    );
-    let CAKE_d = await CAKE_myContract.methods.balanceOf(window.account).call();
-    let CAKE_deposited = Web3.utils.fromWei(CAKE_d);
-    window.CAKE_depositedLp = CAKE_deposited;
-
     // --------- KPOP SINGLE STAKING -----------
     let KPOP = new web3.eth.Contract(window.erc20_abi, KPOP_address);
 
