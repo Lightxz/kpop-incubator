@@ -25,7 +25,7 @@ function KpopStand(props) {
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://www.dextools.io/app/pancakeswap/pair-explorer/0x83ca76bdc2e454e362826c25b8f4abd0791bb594"
+                href="https://poocoin.app/tokens/0x8efef94ea1b04aa02814f0f5c7a7389dabdb6d6a"
                 className="kpop-usd-price"
               >{`$ ${kpopUsdPrice}`}</a>
             </div>

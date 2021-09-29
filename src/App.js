@@ -482,8 +482,8 @@ window.KPOP_FAN_TOKEN_ADDRESS = "0x3Ba2b1C2c46200e826C56550ff7a2b29bad10F3d";
 window.BND_BUSD_LP_ADDRESS = "0x1B96B92314C44b159149f7E0303511fB2Fc4774f";
 window.CAKE_BUSD_LP_ADDRESS = "0x804678fa97d91b974ec2af3c843270886528a9e6";
 
-window.KPOP_BUSD_FARMING_ADDRESS = "0x9a74B9e221D6D13C1ffe341c797072514E8f617c";
-window.KPOP_BUSD_SMART_CONTRACT = "0x9484201A78FBE9B75A145044d4a1b50d2d7A360F";
+window.KPOP_BUSD_FARMING_ADDRESS = "0x57210518a135b2cd2E68d11A72B111231457bd93";
+window.KPOP_BUSD_SMART_CONTRACT = "0xf92CD926350199501026ff3a4Ae96EbfFf5Bf4Ad";
 
 window.KPOP_CAKE_FARMING_ADDRESS = "0x47E03D4D62132A7E772Fe9cAbE41dF825550821a";
 window.KPOP_CAKE_SMART_CONTRACT = "0xb866B850c2e7Aac728267db76bF87F8cE382b382";
@@ -491,7 +491,7 @@ window.KPOP_CAKE_SMART_CONTRACT = "0xb866B850c2e7Aac728267db76bF87F8cE382b382";
 window.KPOP_FARMING_ADDRESS = "0x415685EB61F480C017b9EA9499a8fd104CB679f5";
 window.KPOP_SMART_CONTRACT = "0x3Ba2b1C2c46200e826C56550ff7a2b29bad10F3d";
 
-window.KFAN_FARMING_ADDRESS = "0xc9C011a21bf93F4f09E5D5f636c70473f30ecE0B";
+window.KFAN_FARMING_ADDRESS = "0xE97135D7a4bCA8fEAaE572A4241082F6196C05A0";
 window.KFAN_SMART_CONTRACT = "0x8efef94ea1b04aa02814f0f5c7a7389dabdb6d6a";
 
 class App extends Component {
@@ -558,18 +558,36 @@ class App extends Component {
     let bnbPrice = busdBalance / bnbBalance;
 
     // get kpop price in bnb:
-    let mytoken = new web3.eth.Contract(
-      window.erc20_abi,
-      window.KPOP_FAN_TOKEN_ADDRESS
-    );
+    // let mytoken = new web3.eth.Contract(
+    //   window.erc20_abi,
+    //   window.KPOP_FAN_TOKEN_ADDRESS
+    // );
     let bnbPoolBalance = await wbnb.methods
       .balanceOf(window.KPOP_BNB_SMART_CONTRACT)
       .call();
-    let tokenPoolBalance = await mytoken.methods
-      .balanceOf(window.KPOP_BNB_SMART_CONTRACT)
+    // let tokenPoolBalance = await mytoken.methods
+    //   .balanceOf(window.KPOP_BNB_SMART_CONTRACT)
+    //   .call();
+    // let tokenBnbPrice = bnbPoolBalance / tokenPoolBalance;
+    // window.kpopUsdPrice = bnbPrice * tokenBnbPrice;
+
+    let KFAN = new web3.eth.Contract(window.erc20_abi, KFAN_address);
+
+    let KFAN_poolBalance = await KFAN.methods
+      .balanceOf(window.KFAN_SMART_CONTRACT)
       .call();
-    let tokenBnbPrice = bnbPoolBalance / tokenPoolBalance;
-    window.kpopUsdPrice = bnbPrice * tokenBnbPrice;
+
+    let KFAN_busdPoolBalance = await busd.methods
+      .balanceOf(window.KPOP_BUSD_SMART_CONTRACT)
+      .call();
+    let KFAN_tokenPoolBalance = await KFAN.methods
+      .balanceOf(window.KPOP_BUSD_SMART_CONTRACT)
+      .call();
+    let kfanPriceInBusd =
+      Number(KFAN_busdPoolBalance) / Number(KFAN_tokenPoolBalance);
+
+    window.kfanUsdPrice = kfanPriceInBusd;
+    window.kpopUsdPrice = kfanPriceInBusd;
 
     // Calculate Lp token value:
     let lpToken = new web3.eth.Contract(
@@ -655,11 +673,6 @@ class App extends Component {
     window.KPOP_depositedLp = KPOP_deposited;
 
     // --------- KFAN SINGLE STAKING -----------
-    let KFAN = new web3.eth.Contract(window.erc20_abi, KFAN_address);
-
-    let KFAN_poolBalance = await KFAN.methods
-      .balanceOf(window.KFAN_SMART_CONTRACT)
-      .call();
 
     // Calculate Lp token value:
     let KFAN_lpToken = new web3.eth.Contract(
@@ -668,7 +681,6 @@ class App extends Component {
     );
     let KFAN_totalLPtSupply = await KFAN_lpToken.methods.totalSupply().call();
 
-    window.kfanUsdPrice = bnbPrice * tokenBnbPrice;
     window.KFAN_lptValue =
       ((KFAN_poolBalance * 2) / KFAN_totalLPtSupply) * window.kfanUsdPrice;
 
