@@ -57,7 +57,7 @@ function KpopStand(props) {
                 >
                   <div className="accordion-body ">
                     <Row justicy>
-                      <DepositedCard
+                      {/* <DepositedCard
                         title="KPOP Tokens"
                         mainImage={mainImage}
                         availableBalance={window.KPOP_lpBalance}
@@ -65,7 +65,7 @@ function KpopStand(props) {
                         smart_contract={window.KPOP_SMART_CONTRACT}
                         farming_address={window.KPOP_FARMING_ADDRESS}
                         lptValue={window.kpopUsdPrice}
-                      />
+                      /> */}
 
                       <DepositedCard
                         title="KFan Tokens"
@@ -77,7 +77,7 @@ function KpopStand(props) {
                         lptValue={window.kfanUsdPrice}
                       />
 
-                      <DepositedCard
+                      {/* <DepositedCard
                         title="KPOP/BNB LP"
                         mainImage={mainImage}
                         secondaryImage={bnbLogo}
@@ -86,7 +86,7 @@ function KpopStand(props) {
                         smart_contract={window.KPOP_BNB_SMART_CONTRACT}
                         farming_address={window.KPOP_BNB_FARMING_ADDRESS}
                         lptValue={window.lptValue}
-                      />
+                      /> */}
 
                       <DepositedCard
                         isComingSoon={false}

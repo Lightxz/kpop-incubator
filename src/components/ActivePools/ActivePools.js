@@ -22,26 +22,26 @@ class ActivePools extends Component {
 
   async componentDidMount() {
     let web3 = window.w3;
-    // KPOP/BNB
-    // calculate tvl
-    let lpToken = new web3.eth.Contract(
-      window.erc20_abi,
-      window.KPOP_BNB_SMART_CONTRACT
-    );
-    let totalLPLocked = await lpToken.methods
-      .balanceOf(window.KPOP_BNB_FARMING_ADDRESS)
-      .call();
-    totalLPLocked = Web3.utils.fromWei(totalLPLocked);
-    this.setState({ tvl: totalLPLocked * window.lptValue });
-    // calculate yearly apy (yearly kpop distributed value / total locked value)
-    this.setState({
-      annualRoi: ((60000000 * window.kpopUsdPrice) / this.state.tvl) * 100,
-    });
-    // set daily rewards per thousend $
-    this.setState({
-      dailyPerThousand:
-        ((this.state.annualRoi / 100) * 1000) / window.kpopUsdPrice,
-    });
+    // // KPOP/BNB
+    // // calculate tvl
+    // let lpToken = new web3.eth.Contract(
+    //   window.erc20_abi,
+    //   window.KPOP_BNB_SMART_CONTRACT
+    // );
+    // let totalLPLocked = await lpToken.methods
+    //   .balanceOf(window.KPOP_BNB_FARMING_ADDRESS)
+    //   .call();
+    // totalLPLocked = Web3.utils.fromWei(totalLPLocked);
+    // this.setState({ tvl: totalLPLocked * window.lptValue });
+    // // calculate yearly apy (yearly kpop distributed value / total locked value)
+    // this.setState({
+    //   annualRoi: ((60000000 * window.kpopUsdPrice) / this.state.tvl) * 100,
+    // });
+    // // set daily rewards per thousend $
+    // this.setState({
+    //   dailyPerThousand:
+    //     ((this.state.annualRoi / 100) * 1000) / window.kpopUsdPrice,
+    // });
 
     // KPOP/BUSD
     // calculate tvl
@@ -68,30 +68,30 @@ class ActivePools extends Component {
         ((this.state.BUSD_annualRoi / 100) * 1000) / window.kpopUsdPrice,
     });
 
-    // KPOP
-    // calculate tvl
-    let KPOP_lpToken = new web3.eth.Contract(
-      window.erc20_abi,
-      window.KPOP_SMART_CONTRACT
-    );
+    // // KPOP
+    // // calculate tvl
+    // let KPOP_lpToken = new web3.eth.Contract(
+    //   window.erc20_abi,
+    //   window.KPOP_SMART_CONTRACT
+    // );
 
-    let KPOP_totalLPLocked = await KPOP_lpToken.methods
-      .balanceOf(window.KPOP_FARMING_ADDRESS)
-      .call();
+    // let KPOP_totalLPLocked = await KPOP_lpToken.methods
+    //   .balanceOf(window.KPOP_FARMING_ADDRESS)
+    //   .call();
 
-    KPOP_totalLPLocked = Web3.utils.fromWei(KPOP_totalLPLocked);
-    this.setState({ KPOP_tvl: KPOP_totalLPLocked * window.kpopUsdPrice });
+    // KPOP_totalLPLocked = Web3.utils.fromWei(KPOP_totalLPLocked);
+    // this.setState({ KPOP_tvl: KPOP_totalLPLocked * window.kpopUsdPrice });
 
-    // calculate yearly apy (yearly kpop distributed value / total locked value)
-    this.setState({
-      KPOP_annualRoi:
-        ((60000000 * window.kpopUsdPrice) / this.state.KPOP_tvl) * 100,
-    });
-    // set daily rewards per thousend $
-    this.setState({
-      KPOP_dailyPerThousand:
-        ((this.state.KPOP_annualRoi / 100) * 1000) / window.kpopUsdPrice,
-    });
+    // // calculate yearly apy (yearly kpop distributed value / total locked value)
+    // this.setState({
+    //   KPOP_annualRoi:
+    //     ((60000000 * window.kpopUsdPrice) / this.state.KPOP_tvl) * 100,
+    // });
+    // // set daily rewards per thousend $
+    // this.setState({
+    //   KPOP_dailyPerThousand:
+    //     ((this.state.KPOP_annualRoi / 100) * 1000) / window.kpopUsdPrice,
+    // });
 
     // KFAN
     // calculate tvl
@@ -147,13 +147,13 @@ class ActivePools extends Component {
             <hr />
           </div>
 
-          <ActivePool
+          {/* <ActivePool
             title="KPOP"
             mainImage={mainLogo}
             emissionPerDay={this.state.KPOP_dailyPerThousand}
             annualRoi={this.state.KPOP_annualRoi}
             tvl={this.state.KPOP_tvl}
-          />
+          /> */}
           <ActivePool
             title="KFan"
             mainImage={mainLogo}
@@ -162,7 +162,7 @@ class ActivePools extends Component {
             tvl={this.state.KFAN_tvl}
           />
 
-          <ActivePool
+          {/* <ActivePool
             title="KPOP/BNB"
             mainImage={mainLogo}
             secondaryImage={bnbLogo}
@@ -170,7 +170,7 @@ class ActivePools extends Component {
             annualRoi={this.state.annualRoi}
             tvl={this.state.tvl}
             learnMoreLink="https://kpopfantoken.medium.com/liquidity-mining-with-kpop-fan-token-d847ff6ba64f?postPublishedType=initial"
-          />
+          /> */}
 
           <ActivePool
             isComingSoon={false}

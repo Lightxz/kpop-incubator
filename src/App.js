@@ -482,6 +482,7 @@ window.KPOP_FAN_TOKEN_ADDRESS = "0x3Ba2b1C2c46200e826C56550ff7a2b29bad10F3d";
 window.BND_BUSD_LP_ADDRESS = "0x1B96B92314C44b159149f7E0303511fB2Fc4774f";
 window.CAKE_BUSD_LP_ADDRESS = "0x804678fa97d91b974ec2af3c843270886528a9e6";
 
+// FOR SIMPLICITY, ALL KPOP_BUSD ARE KFAN_BUSD SINCE THE MIGRATION
 window.KPOP_BUSD_FARMING_ADDRESS = "0x57210518a135b2cd2E68d11A72B111231457bd93";
 window.KPOP_BUSD_SMART_CONTRACT = "0xf92CD926350199501026ff3a4Ae96EbfFf5Bf4Ad";
 
@@ -641,36 +642,36 @@ class App extends Component {
     window.BUSD_depositedLp = BUSD_deposited;
 
     // --------- KPOP SINGLE STAKING -----------
-    let KPOP = new web3.eth.Contract(window.erc20_abi, KPOP_address);
+    // let KPOP = new web3.eth.Contract(window.erc20_abi, KPOP_address);
 
-    let KPOP_poolBalance = await KPOP.methods
-      .balanceOf(window.KPOP_SMART_CONTRACT)
-      .call();
+    // let KPOP_poolBalance = await KPOP.methods
+    //   .balanceOf(window.KPOP_SMART_CONTRACT)
+    //   .call();
 
-    // Calculate Lp token value:
-    let KPOP_lpToken = new web3.eth.Contract(
-      window.erc20_abi,
-      window.KPOP_SMART_CONTRACT
-    );
-    let KPOP_totalLPtSupply = await KPOP_lpToken.methods.totalSupply().call();
+    // // Calculate Lp token value:
+    // let KPOP_lpToken = new web3.eth.Contract(
+    //   window.erc20_abi,
+    //   window.KPOP_SMART_CONTRACT
+    // );
+    // let KPOP_totalLPtSupply = await KPOP_lpToken.methods.totalSupply().call();
 
-    window.KPOP_lptValue =
-      ((KPOP_poolBalance * 2) / KPOP_totalLPtSupply) * window.kpopUsdPrice;
+    // window.KPOP_lptValue =
+    //   ((KPOP_poolBalance * 2) / KPOP_totalLPtSupply) * window.kpopUsdPrice;
 
-    // Get lp token balance:
-    let KPOP_myBalance = await KPOP_lpToken.methods
-      .balanceOf(window.account)
-      .call();
-    window.KPOP_lpBalance = Web3.utils.fromWei(KPOP_myBalance);
+    // // Get lp token balance:
+    // let KPOP_myBalance = await KPOP_lpToken.methods
+    //   .balanceOf(window.account)
+    //   .call();
+    // window.KPOP_lpBalance = Web3.utils.fromWei(KPOP_myBalance);
 
-    // Get deposited lp tokens:
-    let KPOP_myContract = new web3.eth.Contract(
-      window.farming_abi,
-      window.KPOP_FARMING_ADDRESS
-    );
-    let KPOP_d = await KPOP_myContract.methods.balanceOf(window.account).call();
-    let KPOP_deposited = Web3.utils.fromWei(KPOP_d);
-    window.KPOP_depositedLp = KPOP_deposited;
+    // // Get deposited lp tokens:
+    // let KPOP_myContract = new web3.eth.Contract(
+    //   window.farming_abi,
+    //   window.KPOP_FARMING_ADDRESS
+    // );
+    // let KPOP_d = await KPOP_myContract.methods.balanceOf(window.account).call();
+    // let KPOP_deposited = Web3.utils.fromWei(KPOP_d);
+    // window.KPOP_depositedLp = KPOP_deposited;
 
     // --------- KFAN SINGLE STAKING -----------
 

@@ -23,12 +23,12 @@ class KpopEarned extends Component {
     let _web3 = window.w3;
 
     // KPOP/BNB
-    let myContract = new _web3.eth.Contract(
-      window.farming_abi,
-      window.KPOP_BNB_FARMING_ADDRESS
-    );
-    let e = await myContract.methods.earned(window.account).call();
-    let BNB_earned = Web3.utils.fromWei(e);
+    // let myContract = new _web3.eth.Contract(
+    //   window.farming_abi,
+    //   window.KPOP_BNB_FARMING_ADDRESS
+    // );
+    // let e = await myContract.methods.earned(window.account).call();
+    // let BNB_earned = Web3.utils.fromWei(e);
 
     // KPOP/BUSD
     let BUSD_myContract = new _web3.eth.Contract(
@@ -39,12 +39,12 @@ class KpopEarned extends Component {
     let BUSD_earned = Web3.utils.fromWei(BUSD_e);
 
     // KPOP POOL
-    let KPOP_myContract = new _web3.eth.Contract(
-      window.farming_abi,
-      window.KPOP_FARMING_ADDRESS
-    );
-    let KPOP_e = await KPOP_myContract.methods.earned(window.account).call();
-    let KPOP_earned = Web3.utils.fromWei(KPOP_e);
+    // let KPOP_myContract = new _web3.eth.Contract(
+    //   window.farming_abi,
+    //   window.KPOP_FARMING_ADDRESS
+    // );
+    // let KPOP_e = await KPOP_myContract.methods.earned(window.account).call();
+    // let KPOP_earned = Web3.utils.fromWei(KPOP_e);
 
     // KFAN POOL
     let KFAN_myContract = new _web3.eth.Contract(
@@ -56,15 +56,9 @@ class KpopEarned extends Component {
 
     this.setState({
       isLoading: false,
-      totalEarned:
-        Number(BUSD_earned) +
-        Number(BNB_earned) +
-        Number(KPOP_earned) +
-        Number(KFAN_earned),
+      totalEarned: Number(BUSD_earned) + Number(KFAN_earned),
 
-      BNBEarnedInNumber: Number(BNB_earned),
       BUSDEarnedInNumber: Number(BUSD_earned),
-      KPOPEarnedInNumber: Number(KPOP_earned),
       KFANEarnedInNumber: Number(KFAN_earned),
     });
   }
@@ -73,16 +67,16 @@ class KpopEarned extends Component {
     this.setState({ isLoading: true });
     let _web3 = window.w3;
 
-    if (Boolean(this.state.BNBEarnedInNumber)) {
-      // KPOP/BNB
-      let myContract = new _web3.eth.Contract(
-        window.farming_abi,
-        window.KPOP_BNB_FARMING_ADDRESS
-      );
-      await myContract.methods.getReward().send({
-        from: window.account,
-      });
-    }
+    // if (Boolean(this.state.BNBEarnedInNumber)) {
+    //   // KPOP/BNB
+    //   let myContract = new _web3.eth.Contract(
+    //     window.farming_abi,
+    //     window.KPOP_BNB_FARMING_ADDRESS
+    //   );
+    //   await myContract.methods.getReward().send({
+    //     from: window.account,
+    //   });
+    // }
 
     if (Boolean(this.state.BUSDEarnedInNumber)) {
       // KPOP/BUSD
@@ -96,17 +90,17 @@ class KpopEarned extends Component {
       });
     }
 
-    if (Boolean(this.state.KPOPEarnedInNumber)) {
-      // KPOP POOL
-      let KPOP_myContract = new _web3.eth.Contract(
-        window.farming_abi,
-        window.KPOP_FARMING_ADDRESS
-      );
+    // if (Boolean(this.state.KPOPEarnedInNumber)) {
+    //   // KPOP POOL
+    //   let KPOP_myContract = new _web3.eth.Contract(
+    //     window.farming_abi,
+    //     window.KPOP_FARMING_ADDRESS
+    //   );
 
-      await KPOP_myContract.methods.getReward().send({
-        from: window.account,
-      });
-    }
+    //   await KPOP_myContract.methods.getReward().send({
+    //     from: window.account,
+    //   });
+    // }
 
     if (Boolean(this.state.KFANEarnedInNumber)) {
       // KFAN POOL

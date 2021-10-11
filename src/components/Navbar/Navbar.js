@@ -53,7 +53,7 @@ function Navbar(props) {
             >
               <img className="nav-logo" src={logo} alt="logo" />
               <p className="brand-name">
-                <span>KPOP</span> DIGITAL
+                <span>KFAN</span> DIGITAL
               </p>
             </a>
           </Nav.Item>

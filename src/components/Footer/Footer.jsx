@@ -36,38 +36,38 @@ const Footer = () => {
               <h2 className="footer-links-title">Stay connected:</h2>
               <div className="footer-links">
                 <a
-                  href="https://t.me/KPOPtoken"
+                  href="https://t.me/KFanToken"
                   rel="noreferrer"
                   target="_blank"
                   className="footer-link"
                 >
                   <Telegram className="footer-social-icon" />
                 </a>
-                <a
+                {/* <a
                   href="https://twitter.com/KpopToken"
                   rel="noreferrer"
                   target="_blank"
                   className="footer-link"
                 >
                   <Twitter className="footer-social-icon" />
-                </a>
-                <a
+                </a> */}
+                {/* <a
                   href="https://medium.com/@kpopfantoken"
                   rel="noreferrer"
                   target="_blank"
                   className="footer-link"
                 >
                   <span className="footer-social-icon-medium">M</span>
-                </a>
-                <a
+                </a> */}
+                {/* <a
                   href="https://www.youtube.com/channel/UCbAjafnThbqu0bQGSc9m5Sg"
                   rel="noreferrer"
                   target="_blank"
                   className="footer-link"
                 >
                   <Youtube className="footer-social-icon" />
-                </a>
-                <a
+                </a> */}
+                {/* <a
                   href="https://coinmarketcap.com/currencies/kpop-fan-token/"
                   rel="noreferrer"
                   target="_blank"
@@ -78,8 +78,8 @@ const Footer = () => {
                     alt="marketCap-logo"
                     className="footer-image"
                   />
-                </a>
-                <a
+                </a> */}
+                {/* <a
                   href="https://www.coingecko.com/en/coins/kpop-fan-token"
                   rel="noreferrer"
                   target="_blank"
@@ -90,7 +90,7 @@ const Footer = () => {
                     alt="gecko-logo"
                     className="footer-image"
                   />
-                </a>
+                </a> */}
               </div>
             </div>
           </div>
